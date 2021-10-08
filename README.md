@@ -1,6 +1,6 @@
 # GoodFood
 
 ## Thomas 
-##Erwann
-##Mathieu 
-##Tristan
+## Erwann
+## Mathieu 
+## Tristan
