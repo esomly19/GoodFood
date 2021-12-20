@@ -19,6 +19,7 @@ serviceEndpoints:
 policies:
   - log
   - proxy
+  - cors
   # - jwt
   # - request-transformer
 
@@ -48,7 +49,7 @@ pipelines:
               changeOrigin: true
       # - jwt:
       #     action:
-      #       secretOrPublicKey: 'goodfood'
+      #       secretOrPublicKey: 'PIZJFOZF23I2HROZEUFH3'
       #       checkCredentialExistence: false
       # - request-transformer:
       #     action:
