@@ -3,6 +3,24 @@ networks:
     driver: bridge
 
 services:
+  ############################
+  # FRONT-END ################
+  ############################
+
+  front-end:
+    container_name: front-end
+    image: 'node:17-alpine'
+    # env_file:
+    #   - ./auth/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './front-end:/usr/src/app'
+    command: next dev
+    ports:
+      - '3000:3000'
+    networks:
+      - goodfood
+
   #########################################################
   # GATEWAY MICRO SERVICE #################################
   #########################################################
