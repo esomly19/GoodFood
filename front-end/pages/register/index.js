@@ -9,7 +9,7 @@ import {
     Input,
 } from "@chakra-ui/react";
 
-const renseigner="Veuillez renseigner le champs ci-dessus"
+const renseigner="Veuillez renseigner le champs ci-dessus";
 
 export default class Auth extends Component{
     constructor(props) {
@@ -80,7 +80,7 @@ export default class Auth extends Component{
                                 placeholder='Entrez un mot de passe...'
                                 onChange={this.handleChange}
                                 value={password}/>
-                            <Button h='1.75rem' size='sm' onClick={()=>this.setState(!show)}>
+                            <Button h='1.75rem' size='sm' onClick={()=>this.setState({show:!show})}>
                                 {show ? 'Hide' : 'Show'}
                             </Button>
                             <FormHelperText textColor={"red"}>{(empty && !password) ? renseigner : ""}</FormHelperText>
