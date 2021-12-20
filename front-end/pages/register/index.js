@@ -80,13 +80,13 @@ export default class Auth extends Component{
                                 placeholder='Entrez un mot de passe...'
                                 onChange={this.handleChange}
                                 value={password}/>
-                            <Button h='1.75rem' size='sm' onClick={()=>this.setState({show:!show})}>
+                            <Button h='1.75rem' size='sm' variant='good-food' onClick={()=>this.setState({show:!show})}>
                                 {show ? 'Hide' : 'Show'}
                             </Button>
                             <FormHelperText textColor={"red"}>{(empty && !password) ? renseigner : ""}</FormHelperText>
                             <FormHelperText textColor={"red"}>{(passwordError && password.length<8) ? "Le mot de passe doit faire plus de 8 caractères" : ""}</FormHelperText>
                         </FormControl>
-                        <Button mt={4} colorScheme='teal' variant='solid' onClick={this.handleSubmit}>
+                        <Button mt={4} variant='good-food' onClick={this.handleSubmit}>
                             Button
                         </Button>
                     </Container>
