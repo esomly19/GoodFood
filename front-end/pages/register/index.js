@@ -5,9 +5,9 @@ import {
     Container,
     FormControl,
     FormHelperText,
-    FormLabel,
+    FormLabel, Heading,
     Input,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const renseigner="Veuillez renseigner le champs ci-dessus";
 
@@ -39,7 +39,8 @@ export default class Auth extends Component{
         return(
             <>
                 <Center>
-                    <Container alignContent centerContent>
+                    <Container alignContent centerContent variant={"white-round"}>
+                        <Heading>Inscription</Heading>
                         <FormControl>
                             <FormLabel htmlFor='email'>Email</FormLabel>
                             <Input
@@ -87,7 +88,7 @@ export default class Auth extends Component{
                             <FormHelperText textColor={"red"}>{(passwordError && password.length<8) ? "Le mot de passe doit faire plus de 8 caractères" : ""}</FormHelperText>
                         </FormControl>
                         <Button mt={4} variant='good-food' onClick={this.handleSubmit}>
-                            Button
+                            S'inscrire
                         </Button>
                     </Container>
                 </Center>

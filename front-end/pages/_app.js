@@ -7,7 +7,6 @@ const theme = extendTheme({
         bg: '#2A2C41',
         color: '#F4F4F8',
       },
-      // styles for the `a`
       a: {
         color: 'teal.500',
         _hover: {
@@ -18,7 +17,6 @@ const theme = extendTheme({
   },
   components: {
     Button: {
-
       baseStyle: {
         fontWeight: 'bold',
       },
@@ -35,21 +33,24 @@ const theme = extendTheme({
         },
       },
     },
+    Container:{
+      variants:{
+        'white-round':{
+          backgroundColor:'#F4F4F8',
+          color: '#404040',
+          borderRadius:"20px",
+          padding:5,
+          margin:1
+        }
+      }
+    }
   },
 })
 function MyApp({ Component, pageProps }) {
   return (
       <ChakraProvider theme={theme}>
-          <style global jsx>{`
-              html,
-              body,
-              body > div:first-child,
-              div#__next,
-              div#__next > div {
-                height: 100%;
-              }
-            `}</style>
-        <Component {...pageProps} />
+        <style global jsx>{`html,body,body > div:first-child,div#__next,div#__next > div {height: 100%;}`}</style>
+        <Component {...pageProps}/>
       </ChakraProvider>
   );
 }
