@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "front-end",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,6 +11,7 @@
     "@chakra-ui/react": "^1.7.3",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "axios": "^0.24.0",
     "framer-motion": "4",
     "next": "12.0.7",
     "react": "17.0.2",

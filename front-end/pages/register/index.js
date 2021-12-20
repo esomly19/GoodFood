@@ -20,14 +20,16 @@ export default class Auth extends Component{
             firstname:"",
             lastname:"",
             password:"",
+            phone:"",
+            address:"",
             empty:false,
             passwordError:false
         }
     }
 
     handleSubmit = () => {
-        let {email,firstname,lastname,password}=this.state;
-        if(!email||!firstname||!lastname||!password) return this.setState({empty:true});
+        let {email,firstname,lastname,password,phone,address}=this.state;
+        if(!email||!firstname||!lastname||!password||!phone||!address) return this.setState({empty:true});
         if(password.length<8) return this.setState({passwordError:true});
     }
 
@@ -35,7 +37,7 @@ export default class Auth extends Component{
 
 
     render(){
-        let {show,email,firstname,lastname,password,empty,passwordError}=this.state;
+        let {show,email,firstname,lastname,password,phone,address,empty,passwordError}=this.state;
         return(
             <>
                 <Center>
@@ -86,6 +88,26 @@ export default class Auth extends Component{
                             </Button>
                             <FormHelperText textColor={"red"}>{(empty && !password) ? renseigner : ""}</FormHelperText>
                             <FormHelperText textColor={"red"}>{(passwordError && password.length<8) ? "Le mot de passe doit faire plus de 8 caractères" : ""}</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor='phone'>Num. Téléphone</FormLabel>
+                            <Input
+                              borderColor={(empty&&!phone)?"red":"gray.200"}
+                              id='phone'
+                              placeholder='Entrez votre numéro de téléphone...'
+                              onChange={this.handleChange}
+                              value={phone}/>
+                            <FormHelperText textColor={"red"}>{(empty && !phone) ? renseigner : ""}</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor='address'>Adresse</FormLabel>
+                            <Input
+                              borderColor={(empty&&!address)?"red":"gray.200"}
+                              id='phone'
+                              placeholder='Entrez votre adresse...'
+                              onChange={this.handleChange}
+                              value={address}/>
+                            <FormHelperText textColor={"red"}>{(empty && !address) ? renseigner : ""}</FormHelperText>
                         </FormControl>
                         <Button mt={4} variant='good-food' onClick={this.handleSubmit}>
                             S'inscrire
