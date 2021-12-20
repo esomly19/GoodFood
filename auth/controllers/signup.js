@@ -10,10 +10,7 @@ module.exports = async (req, res) => {
       email,
     });
 
-    res.status(401).json({
-      status: 'Error',
-      message: 'Email already used',
-    });
+    res.status(401).send('Email already used');
   } catch (error) {
     if (error.response.status === 404) {
       const newUser = {
@@ -46,11 +43,7 @@ module.exports = async (req, res) => {
             message: 'User signed up',
             token,
           })
-        : res.status(500).json({
-            status: 'Error',
-            message: 'Server Internal Error',
-            error: err,
-          });
+        : res.status(500).send('Server Internal Error');
     }
   }
 };

@@ -8,6 +8,7 @@ import {
     FormLabel, Heading,
     Input,
 } from '@chakra-ui/react';
+import axios from 'axios';
 
 const renseigner="Veuillez renseigner le champs ci-dessus";
 
@@ -31,6 +32,10 @@ export default class Auth extends Component{
         let {email,firstname,lastname,password,phone,address}=this.state;
         if(!email||!firstname||!lastname||!password||!phone||!address) return this.setState({empty:true});
         if(password.length<8) return this.setState({passwordError:true});
+        axios.post("http://localhost:3002/auth/signup",this.state, { headers: { 'Access-Control-Allow-Origin': '*' }})
+          .then((res)=>{
+            console.log(res)
+        }).catch(console.error)
     }
 
     handleChange = ({target:{id},target}) =>{this.setState({[id]:target.value})}
@@ -103,7 +108,7 @@ export default class Auth extends Component{
                             <FormLabel htmlFor='address'>Adresse</FormLabel>
                             <Input
                               borderColor={(empty&&!address)?"red":"gray.200"}
-                              id='phone'
+                              id='address'
                               placeholder='Entrez votre adresse...'
                               onChange={this.handleChange}
                               value={address}/>
