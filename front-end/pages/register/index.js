@@ -32,7 +32,7 @@ export default class Auth extends Component{
         let {email,firstname,lastname,password,phone,address}=this.state;
         if(!email||!firstname||!lastname||!password||!phone||!address) return this.setState({empty:true});
         if(password.length<8) return this.setState({passwordError:true});
-        axios.post("http://localhost:3002/auth/signup",this.state, { headers: { 'Access-Control-Allow-Origin': '*' }})
+        axios.post("http://localhost:5000/auth/signup",this.state, { headers: { 'Access-Control-Allow-Origin': '*' }})
           .then((res)=>{
             console.log(res)
         }).catch(console.error)
