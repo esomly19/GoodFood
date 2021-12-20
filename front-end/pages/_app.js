@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   styles: {
@@ -29,30 +29,38 @@ const theme = extendTheme({
       },
       variants: {
         'good-food': {
-          bg: '#FDBF50'
+          bg: '#FDBF50',
         },
       },
     },
-    Container:{
-      variants:{
-        'white-round':{
-          backgroundColor:'#F4F4F8',
+    Container: {
+      variants: {
+        'white-round': {
+          backgroundColor: '#F4F4F8',
           color: '#404040',
-          borderRadius:"20px",
-          padding:5,
-          margin:1
-        }
-      }
-    }
+          borderRadius: '20px',
+          padding: 5,
+          margin: 1,
+        },
+      },
+    },
   },
-})
+});
 function MyApp({ Component, pageProps }) {
   return (
-      <ChakraProvider theme={theme}>
-        <style global jsx>{`html,body,body > div:first-child,div#__next,div#__next > div {height: 100%;}`}</style>
-        <Component {...pageProps}/>
-      </ChakraProvider>
+    <ChakraProvider theme={theme}>
+      <style global jsx>{`
+        html,
+        body,
+        body > div:first-child,
+        div#__next,
+        div#__next > div {
+          height: 100%;
+        }
+      `}</style>
+      <Component {...pageProps} />
+    </ChakraProvider>
   );
 }
 
-export default MyApp
+export default MyApp;
