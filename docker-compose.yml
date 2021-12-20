@@ -1,0 +1,110 @@
+networks:
+  goodfood:
+    driver: bridge
+
+services:
+  #########################################################
+  # GATEWAY MICRO SERVICE #################################
+  #########################################################
+
+  gateway-api:
+    container_name: gateway-api
+    image: 'node:17-alpine'
+    # env_file:
+    #   - ./gateway/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './gateway:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '5000:5000'
+    networks:
+      - goodfood
+
+  #########################################################
+  # AUTH MICRO SERVICE ####################################
+  #########################################################
+
+  auth-api:
+    container_name: auth-api
+    image: 'node:17-alpine'
+    # env_file:
+    #   - ./auth/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './auth:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3002:3002'
+    networks:
+      - goodfood
+
+  #########################################################
+  # USERS MICRO SERVICE ###################################
+  #########################################################
+
+  ###########################
+  # USERS API ###############
+  ###########################
+
+  users-api:
+    container_name: users-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./users/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './users/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3001:3001'
+    networks:
+      - goodfood
+    depends_on:
+      - users-db
+
+  ###########################
+  # USERS DB ################
+  ###########################
+
+  users-db:
+    container_name: users-db
+    image: postgres
+    restart: always
+    env_file:
+      - ./users/db/.env
+    volumes:
+      - './users/db/data:/var/lib/postgresql/data'
+      - './users/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
+    ports:
+      - '5432:5432'
+    networks:
+      - goodfood
+
+  users-adminer:
+    container_name: users-adminer
+    restart: unless-stopped
+    image: adminer
+    ports:
+      - '8080:8080'
+    networks:
+      - goodfood
+    depends_on:
+      - users-db
+
+  ######################################################
+  # PG ADMIN TO MANAGE ALL DATABASES ###################
+  ######################################################
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   env_file:
+  #     - ./users/db/.env
+  #   ports:
+  #     - "5050:80"
+  #   networks:
+  #     - goodfood
+  #   depends_on:
+  #     - users-db
