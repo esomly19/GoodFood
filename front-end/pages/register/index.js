@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {
     Button,
     Center,
-    Container,
+    Container, Flex,
     FormControl,
     FormHelperText,
     FormLabel, Heading,
@@ -32,7 +32,11 @@ export default class Auth extends Component{
         let {email,firstname,lastname,password,phone,address}=this.state;
         if(!email||!firstname||!lastname||!password||!phone||!address) return this.setState({empty:true});
         if(password.length<8) return this.setState({passwordError:true});
-        axios.post("http://localhost:5000/auth/signup",this.state, { headers: { 'Access-Control-Allow-Origin': '*' }})
+        let payload={...this.state};
+        delete payload['empty'];
+        delete payload['passwordError'];
+        delete payload['show'];
+        axios.post("http://localhost:5000/auth/signup",payload, { headers: { 'Access-Control-Allow-Origin': '*' }})
           .then((res)=>{
             console.log(res)
         }).catch(console.error)
@@ -44,7 +48,7 @@ export default class Auth extends Component{
     render(){
         let {show,email,firstname,lastname,password,phone,address,empty,passwordError}=this.state;
         return(
-            <>
+            <Flex direction={"column"}>
                 <Center>
                     <Container alignContent centerContent variant={"white-round"}>
                         <Heading>Inscription</Heading>
@@ -98,6 +102,7 @@ export default class Auth extends Component{
                             <FormLabel htmlFor='phone'>Num. Téléphone</FormLabel>
                             <Input
                               borderColor={(empty&&!phone)?"red":"gray.200"}
+                              type={'number'}
                               id='phone'
                               placeholder='Entrez votre numéro de téléphone...'
                               onChange={this.handleChange}
@@ -119,7 +124,7 @@ export default class Auth extends Component{
                         </Button>
                     </Container>
                 </Center>
-            </>
+            </Flex>
         );
     }
 

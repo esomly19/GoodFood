@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import Layout from '../components/Layout';
 const theme = extendTheme({
   styles: {
     global: {
@@ -49,16 +50,10 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <style global jsx>{`
-        html,
-        body,
-        body > div:first-child,
-        div#__next,
-        div#__next > div {
-          height: 100%;
-        }
-      `}</style>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+
     </ChakraProvider>
   );
 }
