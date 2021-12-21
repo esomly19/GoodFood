@@ -52,7 +52,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image textAlign={useBreakpointValue({ base: 'center', md: 'left' })} src={"/goodfood-01.svg"} alt="Vercel Logo" width={120} height={40}/>
+          <Image textAlign={useBreakpointValue({ base: 'center', md: 'left' })} src={"/goodfood-01.svg"} alt="GoodFood Logo" width={120} height={40}/>
           <Flex display={{ base: 'none', md: 'flex' }} >
             <DesktopNav />
           </Flex>

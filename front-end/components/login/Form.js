@@ -29,7 +29,7 @@ export default function Form() {
             <Stack spacing={4}>
                 <HStack>
                     <Box>
-                        <FormControl id="firstName" isRequired>
+                        <FormControl id="firstName">
                             <FormLabel>First Name</FormLabel>
                             <Input type="text" />
                         </FormControl>
