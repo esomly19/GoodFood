@@ -39,16 +39,19 @@ export default function SmallWithLogoLeft() {
                 justify={{ base: 'center', md: 'space-between' }}
                 align={{ base: 'center', md: 'center' }}>
                 <Image src={"/goodfood-01.svg"} alt="Vercel Logo" width={120} height={50}/>
-                <Text>© 2020 Chakra Templates. All rights reserved</Text>
+                <div>
+                    <Text textAlign={"center"}>{"© 2021 GoodFood - Tous Droits Réservés"}</Text>
+                    <Text textAlign={"center"}>{"🚀 Propulsé par MetzSoft"}</Text>
+                </div>
                 <Stack direction={'row'} spacing={6}>
                     <SocialButton label={'Twitter'} href={'#'}>
-                        <FaTwitter />
+                        <FaTwitter color={"#2A2C41"}/>
                     </SocialButton>
                     <SocialButton label={'YouTube'} href={'#'}>
-                        <FaYoutube />
+                        <FaYoutube color={"#2A2C41"}/>
                     </SocialButton>
                     <SocialButton label={'Instagram'} href={'#'}>
-                        <FaInstagram />
+                        <FaInstagram color={"#2A2C41"}/>
                     </SocialButton>
                 </Stack>
             </Container>

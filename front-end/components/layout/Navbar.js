@@ -53,7 +53,7 @@ export default function WithSubnavigation() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Image textAlign={useBreakpointValue({ base: 'center', md: 'left' })} src={"/goodfood-01.svg"} alt="Vercel Logo" width={120} height={40}/>
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex display={{ base: 'none', md: 'flex' }} >
             <DesktopNav />
           </Flex>
         </Flex>
@@ -75,12 +75,9 @@ export default function WithSubnavigation() {
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
+            variant={"good-food"}
             href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
+            >
             Sign Up
           </Button>
         </Stack>

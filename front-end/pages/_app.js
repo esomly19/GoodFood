@@ -2,6 +2,11 @@ import '../styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import Layout from '../components/Layout';
 const theme = extendTheme({
+  colors: {
+    goodfood:{
+      'yellow':'#FDBF50'
+    }
+  },
   styles: {
     global: {
       body: {
@@ -31,6 +36,10 @@ const theme = extendTheme({
       variants: {
         'good-food': {
           bg: '#FDBF50',
+          color:"#F4F4F8",
+          _hover:{
+            color:"#FF724C"
+          }
         },
       },
     },
