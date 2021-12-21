@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form'
-import React from 'react'
+import React, {useState} from 'react'
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,
     Input,
-    Button, Box, HStack, Stack,
+    Button, Box, HStack, Stack, InputGroup, InputRightElement,
 } from '@chakra-ui/react'
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 
 export default function Form() {
+    const [showPassword,setShowPass]=useState();
     const {
         handleSubmit,
         register,
@@ -29,14 +31,14 @@ export default function Form() {
             <Stack spacing={4}>
                 <HStack>
                     <Box>
-                        <FormControl id="firstName">
-                            <FormLabel>First Name</FormLabel>
+                        <FormControl id="firstname">
+                            <FormLabel>NOM</FormLabel>
                             <Input type="text" />
                         </FormControl>
                     </Box>
                     <Box>
-                        <FormControl id="lastName">
-                            <FormLabel>Last Name</FormLabel>
+                        <FormControl id="lastname">
+                            <FormLabel>Prénom</FormLabel>
                             <Input type="text" />
                         </FormControl>
                     </Box>
@@ -57,8 +59,31 @@ export default function Form() {
                     {errors.name && errors.name.message}
                 </FormErrorMessage>
             </FormControl>
+            <FormControl id="phone">
+                <FormLabel>Téléphone</FormLabel>
+                <Input type="number" />
+            </FormControl>
+            <FormControl id="address">
+                <FormLabel>Adresse</FormLabel>
+                <Input type="text" />
+            </FormControl>
+            <FormControl id="password">
+                <FormLabel>Mot de passe</FormLabel>
+                <InputGroup>
+                    <Input type={showPassword ? 'text' : 'password'} />
+                    <InputRightElement h={'full'}>
+                        <Button
+                            variant={'ghost'}
+                            onClick={() =>
+                                setShowPass((showPassword) => !showPassword)
+                            }>
+                            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+            </FormControl>
             <Button mt={4} variant={"good-food"} isLoading={isSubmitting} type='submit'>
-                Submit
+                S'inscrire
             </Button>
         </form>
     )

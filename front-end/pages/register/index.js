@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Form from "../../components/login/Form";
-import {Container} from "@chakra-ui/react";
+import {Container, Heading} from "@chakra-ui/react";
 
 export default class Auth extends Component{
     constructor(props) {
@@ -16,6 +16,7 @@ export default class Auth extends Component{
 
         return(
           <Container variant={"white-round"} mt={5}>
+              <Heading textAlign={"center"} mb={5}>Inscription</Heading>
               <Form />
           </Container>
         );
