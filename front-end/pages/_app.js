@@ -1,17 +1,21 @@
 import '../styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import Layout from '../components/Layout';
+import Layout from '../components/layout/Layout';
 const theme = extendTheme({
   colors: {
     goodfood:{
-      'yellow':'#FDBF50'
+      'yellow':'#FDBF50',
+      'white':'#F4F4F8',
+      'blue':'#2A2C41',
+      'red':'#FF724C'
+
     }
   },
   styles: {
     global: {
       body: {
-        bg: '#2A2C41',
-        color: '#F4F4F8',
+        bg: 'goodfood.blue',
+        color: 'goodfood.white',
       },
       a: {
         color: 'teal.500',
@@ -35,10 +39,10 @@ const theme = extendTheme({
       },
       variants: {
         'good-food': {
-          bg: '#FDBF50',
-          color:"#F4F4F8",
+          bg: 'goodfood.yellow',
+          color:"goodfood.white",
           _hover:{
-            color:"#FF724C"
+            color:"goodfood.red"
           }
         },
       },
@@ -46,11 +50,10 @@ const theme = extendTheme({
     Container: {
       variants: {
         'white-round': {
-          backgroundColor: '#F4F4F8',
-          color: '#404040',
+          backgroundColor: 'goodfood.white',
+          color: 'goodfood.blue',
           borderRadius: '20px',
           padding: 5,
-          margin: 1,
         },
       },
     },
@@ -62,7 +65,6 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-
     </ChakraProvider>
   );
 }
