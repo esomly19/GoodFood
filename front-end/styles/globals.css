@@ -14,3 +14,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#global-container{
+  position: relative;
+  min-height: 100vh;
+}
+#custom-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+#content-wrap {
+  padding-bottom: 90px;    /* Footer height */
+}
