@@ -10,7 +10,7 @@ import {
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 
 export default function Form() {
-    const [showPassword,setShowPass]=useState();
+    const [showPassword,setShowPass]=useState(false);
     const {
         handleSubmit,
         register,
@@ -31,56 +31,99 @@ export default function Form() {
             <Stack spacing={4}>
                 <HStack>
                     <Box>
-                        <FormControl id="firstname">
+                        <FormControl isInvalid={errors.firstname}>
                             <FormLabel>NOM</FormLabel>
-                            <Input type="text" />
+                            <Input
+                                id="firstname"
+                                type="text"
+                                {...register('firstname', {
+                                    required: 'Veuillez renseigner ce champ.',
+                                })}/>
+                            <FormErrorMessage>
+                                {errors.firstname && errors.firstname.message}
+                            </FormErrorMessage>
                         </FormControl>
                     </Box>
                     <Box>
-                        <FormControl id="lastname">
+                        <FormControl isInvalid={errors.lastname}>
                             <FormLabel>Prénom</FormLabel>
-                            <Input type="text" />
+                            <Input
+                                id="lastname"
+                                type="text"
+                                {...register('lastname', {
+                                    required: 'Veuillez renseigner ce champ.',
+                                })}/>
+                            <FormErrorMessage>
+                                {errors.lastname && errors.lastname.message}
+                            </FormErrorMessage>
                         </FormControl>
                     </Box>
                 </HStack>
             </Stack>
-            <FormControl isInvalid={errors.name}>
+            <FormControl isInvalid={errors.email}>
                 <FormLabel htmlFor='email'>Email</FormLabel>
                 <Input
                     id='email'
-                    type='email'
-                    placeholder='email'
-                    {...register('name', {
-                        required: 'This is required',
-                        minLength: { value: 4, message: 'Minimum length should be 4' },
+                    type='text'
+                    placeholder='Entrez votre email...'
+                    {...register('email', {
+                        required: 'Veuillez renseigner ce champ.',
+                        pattern: {
+                            value: /^\S+@\S+$/i,
+                            message: "Ceci n'est pas une adresse mail valide!"
+                        }
                     })}
                 />
                 <FormErrorMessage>
-                    {errors.name && errors.name.message}
+                    {errors.email && errors.email.message}
                 </FormErrorMessage>
             </FormControl>
-            <FormControl id="phone">
+            <FormControl isInvalid={errors.phone}>
                 <FormLabel>Téléphone</FormLabel>
-                <Input type="number" />
+                <Input
+                    id='phone'
+                    type="number"
+                    placeholder='Entrez votre numéro de téléphone...'
+                    {...register('phone', {
+                        required: 'Veuillez renseigner ce champ.',
+                        maxLength: { value: 12, message: 'Votre numéro doit faire 12 caractères maximum!' },
+                    })}/>
+                <FormErrorMessage>
+                    {errors.phone && errors.phone.message}
+                </FormErrorMessage>
             </FormControl>
-            <FormControl id="address">
+            <FormControl isInvalid={errors.address}>
                 <FormLabel>Adresse</FormLabel>
-                <Input type="text" />
+                <Input
+                    id='address'
+                    type="text"
+                    {...register('address', {
+                        required: 'Veuillez renseigner ce champ.',
+                })}/>
+                <FormErrorMessage>
+                    {errors.address && errors.address.message}
+                </FormErrorMessage>
             </FormControl>
-            <FormControl id="password">
+            <FormControl isInvalid={errors.password}>
                 <FormLabel>Mot de passe</FormLabel>
                 <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} />
+                    <Input
+                        id='password'
+                        type={showPassword ? 'text' : 'password'}
+                        {...register('password', {
+                            required: 'Veuillez renseigner ce champ.',
+                        })}/>
                     <InputRightElement h={'full'}>
                         <Button
                             variant={'ghost'}
-                            onClick={() =>
-                                setShowPass((showPassword) => !showPassword)
-                            }>
+                            onClick={() => setShowPass(!showPassword)}>
                             {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                         </Button>
                     </InputRightElement>
                 </InputGroup>
+                <FormErrorMessage>
+                    {errors.password && errors.password.message}
+                </FormErrorMessage>
             </FormControl>
             <Button mt={4} variant={"good-food"} isLoading={isSubmitting} type='submit'>
                 S'inscrire
