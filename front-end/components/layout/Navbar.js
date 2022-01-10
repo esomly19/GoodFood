@@ -52,7 +52,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image textAlign={useBreakpointValue({ base: 'center', md: 'left' })} src={"/goodfood-01.svg"} alt="GoodFood Logo" width={120} height={40}/>
+          <Image align={useBreakpointValue({ base: 'center', md: 'left' })} src={"/goodfood-01.svg"} alt="GoodFood Logo" width={120} height={40}/>
           <Flex display={{ base: 'none', md: 'flex' }} >
             <DesktopNav />
           </Flex>
@@ -97,9 +97,9 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4} display={"flex"} alignItems={"center"}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS.map((navItem,index) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+          <Popover trigger={'hover'} placement={'bottom-start'} id={"pop"+index}>
             <PopoverTrigger>
               <Link
                 p={2}
