@@ -1,17 +1,23 @@
 import { useForm } from 'react-hook-form'
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,
     Input,
-    Button, Box, HStack, Stack, InputGroup, InputRightElement,
+    Button, Box, HStack, Stack, InputGroup, InputRightElement, Text,
 } from '@chakra-ui/react'
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import passwordEncrypt from "../../utils/passwordEncrypt";
+import axios from "axios";
+import {status} from "../../constants/status";
+import Lottie from "lottie-react";
+import successAnimation from "../../lottie-json/success-animation.json";
 
 export default function FormRegister() {
     const [showPassword,setShowPass]=useState(false);
+    const [posted,setPosted]=useState(0);
+
     const {
         handleSubmit,
         register,
@@ -20,14 +26,21 @@ export default function FormRegister() {
 
     function onSubmit(values) {
         values.password=passwordEncrypt(values.password);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                resolve()
-            }, 3000)
-        })
+        axios.post("http://localhost:5000/auth/signup",values)
+            .then((rep)=> {
+                setPosted(status.SUCCESS);
+            })
+            .catch((err)=>{
+                setPosted(status.ERROR)
+            });
     }
-
+    if(posted===status.SUCCESS)
+        return(
+            <Fragment>
+                <Lottie animationData={successAnimation} loop={false} />
+                <Text fontSize='2xl' color={"green.600"} textAlign={"center"}>Inscription réussie!</Text>
+            </Fragment>
+        );
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
@@ -136,6 +149,7 @@ export default function FormRegister() {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
+            <Text hidden={posted===status.ERROR?false:true} color={"red"} m={2}>{"Un compte avec cette adresse mail a déjà été créé !"}</Text>
             <Button mt={4} variant={"good-food"} isLoading={isSubmitting} type='submit'>
                 {"S'inscrire"}
             </Button>

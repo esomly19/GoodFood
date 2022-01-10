@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import FormRegister from "../../components/forms/FormRegister";
 import {Container, Flex, Heading} from "@chakra-ui/react";
-
 export default class Auth extends Component{
     constructor(props) {
         super(props);
