@@ -36,8 +36,11 @@ export default function Form() {
                             <Input
                                 id="firstname"
                                 type="text"
+                                placeholder='Nom...'
                                 {...register('firstname', {
                                     required: 'Veuillez renseigner ce champ.',
+                                    maxLength: { value: 24, message: 'Votre nom dépasse les 24 caractères !' },
+                                    minLength: { value: 2, message: 'Votre nom doit faire plus de 2 caractères !' },
                                 })}/>
                             <FormErrorMessage>
                                 {errors.firstname && errors.firstname.message}
@@ -50,8 +53,11 @@ export default function Form() {
                             <Input
                                 id="lastname"
                                 type="text"
+                                placeholder='Prénom...'
                                 {...register('lastname', {
                                     required: 'Veuillez renseigner ce champ.',
+                                    maxLength: { value: 24, message: 'Votre prénom dépasse les 24 caractères!' },
+                                    minLength: { value: 2, message: 'Votre prénom doit faire plus de 2 caractères !' },
                                 })}/>
                             <FormErrorMessage>
                                 {errors.lastname && errors.lastname.message}
@@ -86,7 +92,7 @@ export default function Form() {
                     placeholder='Entrez votre numéro de téléphone...'
                     {...register('phone', {
                         required: 'Veuillez renseigner ce champ.',
-                        maxLength: { value: 12, message: 'Votre numéro doit faire 12 caractères maximum!' },
+                        maxLength: { value: 10, message: 'Votre numéro doit faire 10 caractères maximum!' },
                     })}/>
                 <FormErrorMessage>
                     {errors.phone && errors.phone.message}
@@ -97,6 +103,7 @@ export default function Form() {
                 <Input
                     id='address'
                     type="text"
+                    placeholder='Entrez votre adresse...'
                     {...register('address', {
                         required: 'Veuillez renseigner ce champ.',
                 })}/>
@@ -110,8 +117,13 @@ export default function Form() {
                     <Input
                         id='password'
                         type={showPassword ? 'text' : 'password'}
+                        placeholder='Entrez un mot de passe...'
                         {...register('password', {
                             required: 'Veuillez renseigner ce champ.',
+                            pattern: {
+                                message: "Ceci n'est pas un mot de passe valide!"
+                            },
+                            minLength: { value: 8, message: 'Votre mot de passe doit faire 8 caractères minimum!' },
                         })}/>
                     <InputRightElement h={'full'}>
                         <Button
