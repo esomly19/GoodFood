@@ -17,13 +17,14 @@ a {
 
 #global-container{
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh);
 }
 #custom-footer{
-  position: absolute;
   bottom: 0;
   width: 100%;
+  margin-top:1vh;
 }
 #content-wrap {
-  padding-bottom: 90px;    /* Footer height */
+  min-height: 80.9vh;
+  display:flex;
 }

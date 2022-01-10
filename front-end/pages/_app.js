@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import Layout from '../components/layout/Layout';
+import {useRef} from "react";
 const theme = extendTheme({
   colors: {
     goodfood:{
@@ -60,10 +61,11 @@ const theme = extendTheme({
   },
 });
 function MyApp({ Component, pageProps }) {
+  const ref=useRef();
   return (
     <ChakraProvider theme={theme}>
       <Layout>
-        <Component {...pageProps} />
+        <Component ref={ref} {...pageProps} />
       </Layout>
     </ChakraProvider>
   );

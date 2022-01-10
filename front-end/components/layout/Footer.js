@@ -41,7 +41,7 @@ export default function SmallWithLogoLeft() {
                 align={{ base: 'center', md: 'center' }}>
                 <Image src={"/goodfood-01.svg"} alt="Vercel Logo" width={120} height={50}/>
                 <div>
-                    <Text textAlign={"center"}>{"© 2021 GoodFood - Tous Droits Réservés"}</Text>
+                    <Text textAlign={"center"}>{"© 2022 GoodFood - Tous Droits Réservés"}</Text>
                     <Text textAlign={"center"}>{"🚀 Propulsé par MetzSoft"}</Text>
                 </div>
                 <Stack direction={'row'} spacing={6}>
