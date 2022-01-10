@@ -8,8 +8,9 @@ import {
     Button, Box, HStack, Stack, InputGroup, InputRightElement,
 } from '@chakra-ui/react'
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
+import passwordEncrypt from "../../utils/passwordEncrypt";
 
-export default function Form() {
+export default function FormRegister() {
     const [showPassword,setShowPass]=useState(false);
     const {
         handleSubmit,
@@ -18,6 +19,7 @@ export default function Form() {
     } = useForm()
 
     function onSubmit(values) {
+        values.password=passwordEncrypt(values.password);
         return new Promise((resolve) => {
             setTimeout(() => {
                 alert(JSON.stringify(values, null, 2))
@@ -120,9 +122,6 @@ export default function Form() {
                         placeholder='Entrez un mot de passe...'
                         {...register('password', {
                             required: 'Veuillez renseigner ce champ.',
-                            pattern: {
-                                message: "Ceci n'est pas un mot de passe valide!"
-                            },
                             minLength: { value: 8, message: 'Votre mot de passe doit faire 8 caractères minimum!' },
                         })}/>
                     <InputRightElement h={'full'}>
@@ -138,7 +137,7 @@ export default function Form() {
                 </FormErrorMessage>
             </FormControl>
             <Button mt={4} variant={"good-food"} isLoading={isSubmitting} type='submit'>
-                S'inscrire
+                {"S'inscrire"}
             </Button>
         </form>
     )

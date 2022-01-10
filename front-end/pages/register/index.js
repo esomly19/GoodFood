@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Form from "../../components/register/Form";
+import FormRegister from "../../components/forms/FormRegister";
 import {Container, Flex, Heading} from "@chakra-ui/react";
 
 export default class Auth extends Component{
@@ -15,7 +15,7 @@ export default class Auth extends Component{
             <Flex alignItems={"center"} justifyContent={"center"} w={"100%"}>
                 <Container h={"fit-content"} variant={"white-round"} mt={5}>
                     <Heading textAlign={"center"} mb={5}>Inscription</Heading>
-                    <Form />
+                    <FormRegister />
                 </Container>
             </Flex>
         );

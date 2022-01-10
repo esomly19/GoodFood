@@ -68,17 +68,18 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'#'}>
-            Sign In
+            href={'/login'}>
+            {"Se connecter"}
           </Button>
           <Button
+            as={"a"}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
             variant={"good-food"}
-            href={'#'}
+            href={'/register'}
             >
-            Sign Up
+            {"S'inscrire"}
           </Button>
         </Stack>
       </Flex>
