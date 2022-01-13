@@ -42,7 +42,8 @@ const theme = extendTheme({
           bg: 'goodfood.yellow',
           color:"goodfood.white",
           _hover:{
-            color:"goodfood.red"
+            color:"goodfood.blue",
+            textDecoration: "none"
           }
         },
       },
