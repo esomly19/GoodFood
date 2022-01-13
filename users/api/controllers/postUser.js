@@ -11,14 +11,10 @@ module.exports = async (req, res) => {
     const newUser = await schema.validateAsync(req.body);
   } catch (err) {}
   try {
-    //If it's a new user we salt his password before inserting it
-    const salt = await bcrypt.genSalt(10);
-    const saltedPwd = await bcrypt.hash(password, salt);
-
     const { rows } = await db.query(
       `INSERT INTO users (email, password, firstname, lastname, phone, address) 
               VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [email, saltedPwd, firstname, lastname, phone, address],
+      [email, password, firstname, lastname, phone, address],
     );
 
     res.status(201).json({
