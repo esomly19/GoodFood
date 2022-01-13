@@ -12,7 +12,7 @@ export default class Auth extends Component{
     render(){
         return(
             <Flex alignItems={"center"} justifyContent={"center"} w={"100%"}>
-                <Container h={"fit-content"} variant={"white-round"} mt={5}>
+                <Container variant={"white-round"}>
                     <Heading textAlign={"center"} mb={5}>Inscription</Heading>
                     <FormRegister />
                 </Container>

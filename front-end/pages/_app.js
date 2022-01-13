@@ -9,13 +9,12 @@ const theme = extendTheme({
       'white':'#F4F4F8',
       'blue':'#2A2C41',
       'red':'#FF724C'
-
     }
   },
   styles: {
     global: {
       body: {
-        bg: 'goodfood.blue',
+        bg: 'goodfood.white',
         color: 'goodfood.white',
       },
       a: {
@@ -51,7 +50,7 @@ const theme = extendTheme({
     Container: {
       variants: {
         'white-round': {
-          backgroundColor: 'goodfood.white',
+          backgroundColor: 'white',
           color: 'goodfood.blue',
           borderRadius: '20px',
           padding: 5,

@@ -22,12 +22,11 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import Image from "next/image";
-
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box position={"fixed"} w={"100%"} zIndex={50}>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}

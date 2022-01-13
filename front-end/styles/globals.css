@@ -14,17 +14,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-#global-container{
-  position: relative;
-  min-height: calc(100vh);
-}
-#custom-footer{
-  bottom: 0;
-  width: 100%;
-  margin-top:1vh;
-}
-#content-wrap {
-  min-height: 80.9vh;
-  display:flex;
-}
