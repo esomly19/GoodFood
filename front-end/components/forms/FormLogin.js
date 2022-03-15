@@ -72,7 +72,7 @@ export default function FormLogin() {
                 </FormErrorMessage>
             </FormControl>
             <Button mt={4} variant={"good-food"} isLoading={isSubmitting} type='submit'>
-                {"S'inscrire"}
+                {"Se connecter"}
             </Button>
         </form>
     )
