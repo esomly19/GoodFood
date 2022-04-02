@@ -27,9 +27,14 @@ a {
   padding-bottom: 10px;
   font-weight: bold;
   color:var(--goodfood-blue);
+  cursor: pointer;
 }
-.auth-button[selected]{
-  border-bottom:solid var(--goodfood-red);
+.auth-button:hover{
+  border-bottom: solid var(--goodfood-red);
+  opacity: 0.7;
+}
+.selected{
+  border-bottom:solid var(--goodfood-red) !important;
 }
 .container-auth{
   height: fit-content;
