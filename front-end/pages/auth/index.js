@@ -1,5 +1,7 @@
 import {Container, Flex, Image, Text } from '@chakra-ui/react';
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import Register from '../../components/auth/Register';
+import Login from '../../components/auth/Login';
 
 
 export default class Auth extends Component{
@@ -18,13 +20,22 @@ export default class Auth extends Component{
     const {selected}=this.state;
     return (
       <div className={"auth"}>
-        <Container bg={"goodfood.white"} className={"container-auth"}>
-          <Image src={"/goodfood-01.svg"}/>
-          <Flex justifyContent={"space-between"} w={"100%"} px={"5rem"}>
-            <Text className={"auth-button "+(selected?"selected":"")} onClick={this.handleSelected.bind(this,true)}>Se connecter</Text>
-            <Text className={"auth-button "+(selected?"":"selected")} onClick={this.handleSelected.bind(this,false)} >S'inscrire</Text>
-          </Flex>
-        </Container>
+
+          <Container bg={"goodfood.grey"} className={"container-auth"} >
+            <div className={"container-auth-header"}>
+              <Image src={"/goodfood-01.svg"}/>
+              <Flex w={"100%"} justifyContent={"center"}>
+                <Flex justifyContent={"space-between"} w={"75%"}>
+                  <Text className={"auth-button "+(selected?"selected":"")} onClick={this.handleSelected.bind(this,true)}>Se connecter</Text>
+                  <Text className={"auth-button "+(selected?"":"selected")} onClick={this.handleSelected.bind(this,false)} >S'inscrire</Text>
+                </Flex>
+              </Flex>
+            </div>
+            {selected?<Login/>:<Register/>}
+          </Container>
+
+
+
       </div>
 
     )
