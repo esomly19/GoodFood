@@ -10,8 +10,9 @@ const theme = extendTheme({
       'white': '#FFFFFF',
       'grey':'#F2F2F2',
       'blue': '#2A2C41',
-      'red': '#FF724C'
-    }
+      'red': '#FF724C',
+      'facebook':'#1877F2'
+}
   }
 });
 

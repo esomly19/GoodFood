@@ -1,4 +1,4 @@
-import {Container, Flex, Image, Text } from '@chakra-ui/react';
+import { Container, Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import React, { Component } from 'react';
 import Register from '../../components/auth/Register';
 import Login from '../../components/auth/Login';
@@ -27,6 +27,7 @@ export default class Auth extends Component{
               <Flex w={"100%"} justifyContent={"center"}>
                 <Flex justifyContent={"space-between"} w={"75%"}>
                   <Text className={"auth-button "+(selected?"selected":"")} onClick={this.handleSelected.bind(this,true)}>Se connecter</Text>
+                  <Spacer />
                   <Text className={"auth-button "+(selected?"":"selected")} onClick={this.handleSelected.bind(this,false)} >S'inscrire</Text>
                 </Flex>
               </Flex>
