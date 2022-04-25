@@ -23,19 +23,12 @@ export default class Login extends Component{
           </Button>
           <Text fontWeight={"bold"} my={8}>Ou</Text>
           <Button bg={"goodfood.facebook"} color={"goodfood.white"} w={"100%"} borderRadius={"100"} >
-            <Grid width={"100%"} templateColumns='repeat(5, 1fr)' gap={6}>
-              <GridItem></GridItem>
-              <GridItem  d={'flex'} alignItems={"center"}><BsFacebook/></GridItem>
-              <GridItem d={'flex'} alignItems={"center"}>Se connecter avec Facebook</GridItem>
-            </Grid>
-
+              <BsFacebook/>
+              <Text marginLeft={5} noOfLines={2}>Se connecter avec Facebook</Text>
           </Button>
           <Button bg={"goodfood.white"} color={"goodfood.blue"} w={"100%"} borderRadius={"100"} mt={3} mb={16}>
-            <Grid width={"100%"} templateColumns='repeat(5, 1fr)' gap={6}>
-              <GridItem></GridItem>
-              <GridItem  d={'flex'} alignItems={"center"}><FcGoogle/></GridItem>
-              <GridItem d={'flex'} alignItems={"center"}>Se connecter avec Google</GridItem>
-            </Grid>
+            <FcGoogle/>
+            <Text marginLeft={5} noOfLines={2}>{"Se connecter avec Google"}</Text>
           </Button>
         </Container>
       </ScaleFade>
