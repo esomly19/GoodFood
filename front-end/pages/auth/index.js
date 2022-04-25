@@ -27,7 +27,7 @@ export default class Auth extends Component{
       case STATUS.login:
         return <Login reset={this.handleSelected.bind(this,STATUS.reset)}/>;
       case STATUS.register:
-        return <Register/>;
+        return <Register login={this.handleSelected.bind(this,STATUS.login)}/>;
       case STATUS.reset:
         return <PasswordReset login={this.handleSelected.bind(this,STATUS.login)}/>
       default:

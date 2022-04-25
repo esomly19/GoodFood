@@ -28,7 +28,7 @@ export default class Register extends Component{
                 {"S'inscrire"}
               </Button>
             </Flex>
-            <Text marginLeft={5}>{"Déjà membre?\nSe connecter"}</Text>
+            <Text marginLeft={5}  color={'gray.500'}  fontSize={"xs"} cursor={"pointer"} onClick={this.props.login}>{"Déjà membre? Se connecter"}</Text>
           </Flex>
         </Container>
       </ScaleFade>
