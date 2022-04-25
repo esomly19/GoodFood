@@ -13,7 +13,6 @@ export default class Auth extends Component{
   }
 
   handleSelected = (status)=>{
-    console.log(status)
     this.setState({selected:status});
   }
 

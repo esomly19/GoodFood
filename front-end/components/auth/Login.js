@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Box, Button, Container, Flex, Grid, GridItem, Input, ScaleFade, Text } from '@chakra-ui/react';
 import {BsFacebook} from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import Router from "next/router";
+
+
 
 export default class Login extends Component{
   constructor(props) {
@@ -14,7 +17,7 @@ export default class Login extends Component{
         <Container textAlign={"center"} w={'80%'}>
           <Input placeholder="Email, Nom d'utilisateur" bg={'goodfood.white'} mt={10} />
           <Input placeholder='Mot de passe' bg={'goodfood.white'} type={"password"} mt={3}/>
-          <Text align={'left'} mt={3} color={"goodfood.red"} fontSize={'sm'}>Mot de passe oublié?</Text>
+          <Text align={'left'} mt={3} color={"goodfood.red"} fontSize={'sm'} onClick={()=>{Router.push("/auth/reset")}}>Mot de passe oublié?</Text>
           <Button bg={"goodfood.red"} color={"goodfood.white"} w={"100%"} borderRadius={"100"} mt={50}>
             Se connecter
           </Button>
