@@ -4,7 +4,6 @@ import { BsFacebook, BsGoogle } from 'react-icons/bs';
 import passwordEncrypt from '../../utils/passwordEncrypt';
 import successAnimation from "../../lottie-json/success-animation.json"
 import Lottie from "lottie-react";
-import Router from 'next/router';
 
 export default class Register extends Component{
   constructor(props) {
@@ -76,6 +75,7 @@ export default class Register extends Component{
             bg={'goodfood.white'} mt={10}
             onChange={handleChange}
             value={email}
+            type={"email"}
             name={"email"}/>
           <Input
             placeholder="Nom d'utilisateur"
