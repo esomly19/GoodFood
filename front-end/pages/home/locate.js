@@ -6,6 +6,7 @@ import Router from 'next/router';
 
 export default function locate(props){
   let goodfood = {
+    _id:"906dsqd-sqdsqdzda6da-sdasdasd",
     ville:"Nancy",
     pays:"FRANCE",
     adresse:"50 rue du moulin",
