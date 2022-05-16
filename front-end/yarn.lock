@@ -1274,7 +1274,7 @@ base64-js@^1.0.2:
 bcryptjs@^2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
-  integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
+  integrity sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -2767,17 +2767,17 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lottie-react@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.1.0.tgz#24d20ea41dc10791b1253f408dcb6f3e995780be"
-  integrity sha512-sHDJb5aeh1letUIWqwidHoHZj07ZOZQoLuUgy0gqt9FB/XiCtAZ2+421Cn+ZkHR7anVvWljKhGgctQCtgFloUA==
+lottie-react@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.2.1.tgz#27fbb85a11000557d7166c36a630fe1e5ce07028"
+  integrity sha512-lAdIUw+zeHLX3gtyLkisa4QM9NkTUUeZTsEL53laBEsjIH4JibgwkioZuza8CtwZ7/cpPZRbCRXWKfiuaDZWww==
   dependencies:
-    lottie-web "^5.7.3"
+    lottie-web "^5.8.1"
 
-lottie-web@^5.7.3:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.8.1.tgz#807e0af0ad22b59bf867d964eb684cb3368da0ef"
-  integrity sha512-9gIizWADlaHC2GCt+D+yNpk5l2clZQFqnVWWIVdY0LnxC/uLa39dYltAe3fcmC/hrZ2IUQ8dLlY0O934Npjs7Q==
+lottie-web@^5.8.1:
+  version "5.9.4"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.9.4.tgz#c01478ee5dd47f916cb4bb79040c11d427872d57"
+  integrity sha512-bSs1ZTPifnBVejO1MnQHdfrKfcn02YTCmgOh2wcAEICqRA0V7GzDh8FnwXY6+EzT+i8XOunaIloo/5xC5YNbsA==
 
 lru-cache@^6.0.0:
   version "6.0.0"
