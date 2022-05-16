@@ -1,20 +1,19 @@
 const db = require('../utils/postgres');
-const bcrypt = require('bcrypt');
 const { schema } = require('../utils/joi');
 
 /* GET ALL users  */
 module.exports = async (req, res) => {
   // Destructuring body request
-  const { email, password, firstname, lastname, phone, address } = req.body;
+  const { email, password, username, phone } = req.body;
   try {
     // Confirms the form data is valid
     const newUser = await schema.validateAsync(req.body);
   } catch (err) {}
   try {
     const { rows } = await db.query(
-      `INSERT INTO users (email, password, firstname, lastname, phone, address) 
-              VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [email, password, firstname, lastname, phone, address],
+      `INSERT INTO users (email, password, username, phone) 
+              VALUES ($1, $2, $3, $4) RETURNING *`,
+      [email, password, username, phone],
     );
 
     res.status(201).json({
