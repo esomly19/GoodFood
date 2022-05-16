@@ -1,5 +1,5 @@
 const db = require('../utils/postgres');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { schema } = require('../utils/joi');
 
 /* GET ALL users  */
