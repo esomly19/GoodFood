@@ -15,5 +15,5 @@ const usersRoute = require('./routes/users');
 app.use("/",usersRoute);
 
 app.listen(process.env.PORT||3000,()=>{
-  console.log("User API lauched!"+process.env.PORT)
+  console.log("User API launched!"+process.env.PORT)
 })
