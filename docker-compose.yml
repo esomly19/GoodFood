@@ -2,43 +2,6 @@ networks:
   goodfood:
     driver: bridge
 services:
-  gateway-api:
-    container_name: gateway-api
-    image: 'node:17-alpine'
-    working_dir: /usr/src/app
-    volumes:
-      - './gateway:/usr/src/app'
-    command: npm run dev
-    ports:
-      - '5000:5000'
-    networks:
-      - goodfood
-  auth-api:
-    container_name: auth-api
-    image: 'node:17-alpine'
-    working_dir: /usr/src/app
-    volumes:
-      - './auth:/usr/src/app'
-    command: npm run dev
-    ports:
-      - '3002:3002'
-    networks:
-      - goodfood
-  users-api:
-    container_name: users-api
-    image: 'node:17-alpine'
-    env_file:
-      - ./users/api/.env
-    working_dir: /usr/src/app
-    volumes:
-      - './users/api:/usr/src/app'
-    command: npm run dev
-    ports:
-      - '3001:3001'
-    networks:
-      - goodfood
-    depends_on:
-      - users-db
   users-db:
     container_name: users-db
     image: postgres
@@ -49,16 +12,6 @@ services:
       - './users/db/data:/var/lib/postgresql/data'
       - './users/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
     ports:
-      - '5432:5432'
+      - '127.0.0.1:5432:5432'
     networks:
       - goodfood
-  users-adminer:
-    container_name: users-adminer
-    restart: unless-stopped
-    image: adminer
-    ports:
-      - '8080:8080'
-    networks:
-      - goodfood
-    depends_on:
-      - users-db
