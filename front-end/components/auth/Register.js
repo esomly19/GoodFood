@@ -32,10 +32,9 @@ export default class Register extends Component{
         body: JSON.stringify({email:email,password:encPassword,username:username,phone:phone})
       });
       this.setState({status:res.ok?"error":"ok"})
-      console.log(res)
     }
     catch (e) {
-      console.log(e)
+      console.error(e)
     }
 
   }
