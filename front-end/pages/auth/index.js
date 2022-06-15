@@ -1,8 +1,9 @@
-import { Container, Flex, Image, ScaleFade, Spacer, Text } from '@chakra-ui/react';
+import { Container, Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import React, { Component } from 'react';
 import Register from '../../components/auth/Register';
 import Login from '../../components/auth/Login';
 import PasswordReset from '../../components/auth/PasswordReset';
+import { setCookie } from 'nookies';
 
 export const STATUS = {
   login:0,
