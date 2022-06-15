@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Container, Flex, Heading, Input, ScaleFade, Text } from '@chakra-ui/react';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
-import passwordEncrypt from '../../utils/passwordEncrypt';
 import successAnimation from "../../lottie-json/success-animation.json"
 import Lottie from "lottie-react";
+import { instance } from '../../utils/axiosInstance';
 
 export default class Register extends Component{
   constructor(props) {
@@ -11,7 +11,7 @@ export default class Register extends Component{
     this.state={
       username:"",
       password:"",
-      passwordConfirm:"",
+      confirm_password:"",
       email:"",
       phone:"",
       status:""
@@ -19,22 +19,15 @@ export default class Register extends Component{
   }
 
   submit = async () =>{
-    let {email,password,passwordConfirm,username,phone}=this.state;
-    if(passwordConfirm!==password||!email||!password||!username||!phone)return;
-    let encPassword=passwordEncrypt(password);
+    let {email,password,confirm_password,username,phone}=this.state;
+    if(confirm_password!==password||!email||!password||!username||!phone)return;
     try{
-      let res=await fetch("http://localhost:5000/users",{
-        method:'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email:email,password:encPassword,username:username,phone:phone})
-      });
-      this.setState({status:res.ok?"error":"ok"})
+      let res=await instance.post("/register",{email:email,password:password,confirm_password:confirm_password,username:username,phone:phone});
+      console.log(res)
+      this.setState({status:"ok"})
     }
     catch (e) {
-      console.error(e)
+      this.setState({status:"error"})
     }
 
   }
@@ -44,7 +37,7 @@ export default class Register extends Component{
 
   render() {
     const {submit,handleChange}=this;
-    const {password,email,passwordConfirm,username,phone,status}=this.state;
+    const {password,email,confirm_password,username,phone,status}=this.state;
     if(status==="ok")
       return (
         <ScaleFade initialScale={0.9} in={true}>
@@ -100,9 +93,9 @@ export default class Register extends Component{
             placeholder='Confirmer mot de passe'
             bg={'goodfood.white'} mt={3}
             onChange={handleChange}
-            value={passwordConfirm}
+            value={confirm_password}
             type={"password"}
-            name={"passwordConfirm"}/>
+            name={"confirm_password"}/>
           <Flex flexDirection={"row"} my={50} justifyContent={"space-between"} >
             <Flex width={"100%"}>
               <Button bg={"goodfood.red"} color={"goodfood.white"} w={"80%"} borderRadius={"100"} onClick={submit}>

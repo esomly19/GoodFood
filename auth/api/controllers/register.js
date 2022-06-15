@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
   let {username,email,password,confirm_password}=req.body;
+  console.log(req.body)
   let validated=schema.validate({username:username,email:email,password:password,confirm_password:confirm_password});
   if(validated.error)
     return res.status(406).json(validated.error.details);
+
   if(password!==confirm_password)
     return res.sendStatus(406);
 
