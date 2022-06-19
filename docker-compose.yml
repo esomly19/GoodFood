@@ -2,6 +2,7 @@ networks:
   goodfood:
     driver: bridge
 services:
+
   users-db:
     container_name: users-db
     image: postgres
@@ -15,3 +16,19 @@ services:
       - '127.0.0.1:5432:5432'
     networks:
       - goodfood
+
+  uusers-api:
+    container_name: users-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./users/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './users/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '127.0.0.1:3001:3001'
+    networks:
+      - goodfood
+    depends_on:
+      - users-db
