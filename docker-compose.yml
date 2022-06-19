@@ -17,7 +17,7 @@ services:
     networks:
       - goodfood
 
-  uusers-api:
+  users-api:
     container_name: users-api
     image: 'node:17-alpine'
     env_file:
