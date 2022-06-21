@@ -32,3 +32,21 @@ services:
       - goodfood
     depends_on:
       - users-db
+    expose:
+      - 3001
+
+  auth-api:
+    container_name: auth-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./auth/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './auth/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '127.0.0.1:3002:3002'
+    networks:
+      - goodfood
+    depends_on:
+      - users-api
