@@ -2,7 +2,6 @@ networks:
   goodfood:
     driver: bridge
 services:
-
   users-db:
     container_name: users-db
     image: postgres
@@ -14,6 +13,20 @@ services:
       - './users/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
     ports:
       - '127.0.0.1:5432:5432'
+    networks:
+      - goodfood
+
+  restaurants-db:
+    container_name: restaurants-db
+    image: postgres
+    restart: always
+    env_file:
+      - ./restaurants/db/.env
+    volumes:
+      - './restaurants/db/data:/var/lib/postgresql/data'
+      - './restaurants/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
+    ports:
+      - '127.0.0.1:5433:5432'
     networks:
       - goodfood
 
