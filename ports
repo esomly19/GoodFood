@@ -1,8 +1,12 @@
 front-end=3000
+
 users=3001
 users-db=5432
-restaurants-db=5433
+
 auth=3002
+
 restaurants=3003
+restaurants-db=5433
 
-
+plats=3004
+plats-db=5434

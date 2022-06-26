@@ -30,6 +30,20 @@ services:
     networks:
       - goodfood
 
+  plats-db:
+    container_name: plats-db
+    image: postgres
+    restart: always
+    env_file:
+      - ./plats/db/.env
+    volumes:
+      - './plats/db/data:/var/lib/postgresql/data'
+      - './plats/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
+    ports:
+      - '127.0.0.1:5434:5432'
+    networks:
+      - goodfood
+
   users-api:
     container_name: users-api
     image: 'node:17-alpine'
