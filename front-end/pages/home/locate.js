@@ -39,18 +39,11 @@ const GEOCODE = {
 export default function locate(props){
   const [restaurants,setRestaurants]=useState([]);
   const [restaurant,setRestaurant]=useState(null);
+
   useEffect(async ()=>{
     let {data}=await instanceRestaurant.get("/");
     setRestaurants(data);
   },[])
-
-  let goodfood = {
-    _id:"906dsqd-sqdsqdzda6da-sdasdasd",
-    ville:"Nancy",
-    pays:"FRANCE",
-    adresse:"50 rue du moulin",
-    tel:"0650408090"
-  }
 
   return(
     <HomeLayout>
@@ -85,7 +78,7 @@ export default function locate(props){
                   </Flex>
                 </Flex>
                 <Flex justifyContent={"center"}>
-                  <Button bg={"goodfood.red"} color={"goodfood.white"}>{"Passer une commande"}</Button>
+                  <Button bg={"goodfood.red"} color={"goodfood.white"} onClick={()=>Router.push("/commande/"+restaurant.id)}>{"Passer une commande"}</Button>
                 </Flex>
               </>
             :null

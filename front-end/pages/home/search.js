@@ -23,6 +23,7 @@ export default function search(props){
   const [restaurants,setRestaurants]=useState([]);
   const [restaurant,setRestaurant]=useState(null);
   const [search,setSearch] = useState("");
+
   useEffect(async ()=>{
       let {data}=await instanceRestaurant.get("/");
       setRestaurants(data);
@@ -71,7 +72,7 @@ export default function search(props){
                </Flex>
            </Flex>
          <Flex justifyContent={"center"}>
-           <Button bg={"goodfood.red"} disabled={!restaurant} color={"goodfood.white"}>{"Passer une commande"}</Button>
+           <Button bg={"goodfood.red"} color={"goodfood.white"} onClick={()=>Router.push("/commande/"+restaurant.id)}>{"Passer une commande"}</Button>
          </Flex>
        </Flex>
       </Container>

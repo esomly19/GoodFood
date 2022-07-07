@@ -8,5 +8,5 @@ auth=3002
 restaurants=3003
 restaurants-db=5433
 
-plats=3004
-plats-db=5434
+restaurant_id=3004
+restaurant_id-db=5434

@@ -7,6 +7,7 @@ const getAllRestaurants = async (req,res) => {
 }
 const getRestaurantById = async (req,res) => {
   let {id}=req.body;
+  console.log(id)
   if(!id) return res.sendStatus(403);
   let restaurant = await restaurantById(id);
   res.status(200).send(restaurant);
