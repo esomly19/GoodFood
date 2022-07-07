@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { instance } from '../utils/axiosInstance';
 
 export async function middleware(request) {
   let { href } = request.nextUrl;

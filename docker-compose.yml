@@ -12,7 +12,7 @@ services:
       - './users/db/data:/var/lib/postgresql/data'
       - './users/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
     ports:
-      - '127.0.0.1:5432:5432'
+      - '5432:5432'
     networks:
       - goodfood
 
@@ -26,7 +26,7 @@ services:
       - './restaurants/db/data:/var/lib/postgresql/data'
       - './restaurants/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
     ports:
-      - '127.0.0.1:5433:5432'
+      - '5433:5432'
     networks:
       - goodfood
 
@@ -40,7 +40,7 @@ services:
       - './plats/db/data:/var/lib/postgresql/data'
       - './plats/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
     ports:
-      - '127.0.0.1:5434:5432'
+      - '5434:5432'
     networks:
       - goodfood
 
@@ -54,7 +54,7 @@ services:
       - './users/api:/usr/src/app'
     command: npm run dev
     ports:
-      - '127.0.0.1:3001:3001'
+      - '3001:3001'
     networks:
       - goodfood
     depends_on:
@@ -72,8 +72,46 @@ services:
       - './auth/api:/usr/src/app'
     command: npm run dev
     ports:
-      - '127.0.0.1:3002:3002'
+      - '3002:3002'
     networks:
       - goodfood
     depends_on:
       - users-api
+    expose:
+      - 3002
+
+  plats-api:
+    container_name: plats-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./plats/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './plats/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3004:3004'
+    networks:
+      - goodfood
+    depends_on:
+      - plats-db
+    expose:
+      - 3004
+
+  restaurants-api:
+    container_name: restaurants-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./restaurants/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './restaurants/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3003:3003'
+    networks:
+      - goodfood
+    depends_on:
+      - restaurants-db
+    expose:
+      - 3003
