@@ -14,6 +14,7 @@ const login = async (req, res) => {
     if(!user.data) return res.sendStatus(406);
   }
   catch(e){
+    console.log(e)
     return res.sendStatus(403);
   }
   let logged = bcrypt.compareSync(password, user.data.password);

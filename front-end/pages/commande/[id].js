@@ -3,6 +3,7 @@ import {Container, Flex, Image, Text} from "@chakra-ui/react";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {instanceRestaurant} from "../../utils/axiosInstance";
+import Commande from "../../components/commande/Commande";
 
 export default function restaurant(){
     const router = useRouter()
@@ -15,24 +16,17 @@ export default function restaurant(){
         setRestaurant(data);
     },[id]);
 
-    if(!restaurant)
-        return(
-            <HomeLayout>
-                <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
-                    <Image src={"/goodfood-apple.svg"}/>
-                </Flex>
-                <Container h={"90vh"} w={"90vw"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10} >
-                    <Text align={"center"}>Ce restaurant n'est pas disponible pour le moment!</Text>.
-                </Container>
-            </HomeLayout>);
-    else
-        return(
-            <HomeLayout>
-                <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
-                    <Image src={"/goodfood-apple.svg"}/>
-                </Flex>
-                <Container h={"90vh"} w={"90vw"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10}>
-                    {restaurant.ville}
-                </Container>
-            </HomeLayout>);
+
+    return(
+        <HomeLayout>
+            <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
+                <Image src={"/goodfood-apple.svg"}/>
+            </Flex>
+            <Container h={"90vh"} w={"90vw"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10} >
+                {
+                    restaurant?<Commande restaurant={restaurant}/>:<Text align={"center"}>Ce restaurant n'est pas disponible pour le moment!</Text>
+                }
+            </Container>
+        </HomeLayout>);
+
 }
