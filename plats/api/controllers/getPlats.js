@@ -16,7 +16,7 @@ const getAllPlatsByRestaurant = async (req,res) => {
   if(!restaurant_id)res.sendStatus(403)
   const plats = await allPlatsGenerique();
   const platsGenerique = await allPlatsByRestaurant(restaurant_id);
-  res.status(200).send({...plats,...platsGenerique});
+  res.status(200).send([...plats,...platsGenerique]);
 }
 
 const allPlats = async () => {

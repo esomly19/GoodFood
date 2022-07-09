@@ -72,7 +72,7 @@ export default function search(props){
                </Flex>
            </Flex>
          <Flex justifyContent={"center"}>
-           <Button bg={"goodfood.red"} color={"goodfood.white"} onClick={()=>Router.push("/commande/"+restaurant.id)}>{"Passer une commande"}</Button>
+           <Button bg={"goodfood.red"} disabled={!restaurant} color={"goodfood.white"} _hover={{color:"goodfood.blue"}} onClick={()=>Router.push("/commande/"+restaurant.id)}>{"Passer une commande"}</Button>
          </Flex>
        </Flex>
       </Container>

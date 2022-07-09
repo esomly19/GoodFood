@@ -22,7 +22,7 @@ export default function restaurant(){
             <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
                 <Image src={"/goodfood-apple.svg"}/>
             </Flex>
-            <Container h={"90vh"} w={"90vw"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10} >
+            <Container h={"90vh"} w={"90vw"} className={"container-auth"} borderTopRadius={10} >
                 {
                     restaurant?<Commande restaurant={restaurant}/>:<Text align={"center"}>Ce restaurant n'est pas disponible pour le moment!</Text>
                 }
