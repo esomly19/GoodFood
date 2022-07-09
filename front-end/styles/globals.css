@@ -58,3 +58,4 @@ a {
 .icon-spacing{
   margin-right: 5px;
 }
+::-webkit-scrollbar {display:none;}

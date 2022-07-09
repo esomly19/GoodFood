@@ -5,12 +5,7 @@
   "license": "UNLICENSED",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
-  },
   "dependencies": {
-    "express-gateway": "^1.16.11",
-    "nodemon": "^2.0.15"
+    "express-gateway": "^1.16.11"
   }
 }

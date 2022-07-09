@@ -1,58 +1,32 @@
 http:
-  port: 5000
+  port: 8080
 admin:
   port: 9876
   host: localhost
-
 apiEndpoints:
-  users-api:
-    path: ['/users', '/users/*']
-  auth-api:
-    path: ['/auth', '/auth/*']
-
+  api:
+    host: localhost
+    paths: '/ip'
 serviceEndpoints:
-  users-api:
-    url: http://users-api:3001
-  auth-api:
-    url: http://auth-api:3002
-
+  httpbin:
+    url: 'https://httpbin.org'
 policies:
-  - log
-  - proxy
+  - basic-auth
   - cors
-  # - jwt
-  # - request-transformer
-
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
 pipelines:
-  authPipeline:
+  default:
     apiEndpoints:
-      - auth-api
+      - api
     policies:
-      - log:
-          action:
-            message: 'auth ${req.method}'
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
       - proxy:
           - action:
-              serviceEndpoint: auth-api
+              serviceEndpoint: httpbin 
               changeOrigin: true
-
-  usersPipeline:
-    apiEndpoints:
-      - users-api
-    policies:
-      - log:
-          action:
-            message: 'users ${req.method}'
-      - proxy:
-          - action:
-              serviceEndpoint: users-api
-              changeOrigin: true
-      # - jwt:
-      #     action:
-      #       secretOrPublicKey: 'PIZJFOZF23I2HROZEUFH3'
-      #       checkCredentialExistence: false
-      # - request-transformer:
-      #     action:
-      #       body:
-      #         add:
-      #           user: req.user

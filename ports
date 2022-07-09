@@ -1,0 +1,12 @@
+front-end=3000
+
+users=3001
+users-db=5432
+
+auth=3002
+
+restaurants=3003
+restaurants-db=5433
+
+restaurant_id=3004
+restaurant_id-db=5434

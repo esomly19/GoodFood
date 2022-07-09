@@ -12,7 +12,7 @@ const theme = extendTheme({
       'blue': '#2A2C41',
       'red': '#FF724C',
       'facebook':'#1877F2'
-}
+    }
   }
 });
 

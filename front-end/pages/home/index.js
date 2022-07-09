@@ -4,25 +4,6 @@ import { MdLocationOn, MdSearch } from 'react-icons/md';
 import Router from 'next/router';
 
 export default function home(props){
-  const getExpirationDate = (jwtToken) => {
-    if (!jwtToken) {
-      return null;
-    }
-
-    const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
-
-    // multiply by 1000 to convert seconds into milliseconds
-    return jwt && jwt.exp && jwt.exp * 1000 || null;
-  };
-
-  const isExpired = (exp) => {
-    if (!exp) {
-      return false;
-    }
-
-    return Date.now() > exp;
-  };
-
   return (
     <Flex background={"linear-gradient(#FF9970, #EB5162)"} width={"100%"} alignItems={"center"} flexDirection={"column"}>
       <Image marginY={25} src='/goodfood-apple.svg' alt='GoodFood' />
