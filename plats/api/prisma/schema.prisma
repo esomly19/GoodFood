@@ -13,5 +13,9 @@ model Plat {
   list_ingredient  String[]
   nom              String  @db.VarChar(255)
   restaurant_id    Int?
-  image            String
+  image            String?
+  cuisine          String?
+  tags             String[]
+  supplements      String[]
+  description      String?
 }

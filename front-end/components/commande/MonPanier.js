@@ -21,9 +21,6 @@ export default class MonPanier extends React.Component{
                   </ButtonGroup>
                   <Text w={"33%"} textAlign={"right"}>{(plat.prix_ttc*plat.quantite).toFixed(2)} €</Text>
               </Flex>
-
-
-
           </Flex>
         );
     }
