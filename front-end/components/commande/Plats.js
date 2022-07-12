@@ -4,6 +4,7 @@ import {instancePlat} from "../../utils/axiosInstance";
 import {AiFillStar, AiOutlineSearch} from "react-icons/ai";
 
 import {BsFillPlusCircleFill} from "react-icons/bs";
+import PlatsDrawer from "./PlatsDrawer";
 
 export default class Plats extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class Plats extends React.Component {
             plats:[],
             search:""
         }
+        this.drawerRef=React.createRef();
     }
 
 
@@ -22,12 +24,12 @@ export default class Plats extends React.Component {
 
     handleSearch = ({target}) => this.setState({search: target.value});
 
-    renderPlats = (plat)=>{
+    renderPlats = (plat,index)=>{
         return(
-          <Container marginTop={10} borderRadius={20} p={0} flexDirection={"row"} bg={"goodfood.white"}>
-              <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}/>
+          <Container key={index} marginTop={10} borderRadius={20} p={0} flexDirection={"row"} bg={"goodfood.white"}>
+              <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}  objectFit='cover'/>
               <Flex flexDirection={"column"} pl={5} pr={5}>
-                  <Text as={"i"} fontSize={15} mt={2}>Japonais</Text>
+                  <Text as={"i"} fontSize={15} mt={2}>{"Cuisine "+plat.cuisine}</Text>
               <Flex justifyContent={"space-between"}>
                       <Text color={'goodfood.blue'} fontSize='20px'>{plat.nom}</Text>
                       <Badge variant='solid' colorScheme='green' display={"flex"} alignItems={"center"} borderRadius={20} p={2}>
@@ -36,8 +38,8 @@ export default class Plats extends React.Component {
                       </Badge>
                   </Flex>
                   <Flex justifyContent={"space-between"} mt={2} mb={2} alignItems={"center"}>
-                      <Text color='tomato' fontSize='30px'>{plat.prix_ttc}€</Text>
-                      <BsFillPlusCircleFill color={"#FF724C"} size={30} cursor={"pointer"} style={{filter:"drop-shadow(0px 0px 5px #C0C0C0"}} onClick={()=>this.props.panier.current.addPlat(plat)}/>
+                      <Text color='tomato' fontSize='30px'>{plat.prix_ttc.toFixed(2)}€</Text>
+                      <BsFillPlusCircleFill color={"#FF724C"} size={30} cursor={"pointer"} style={{filter:"drop-shadow(0px 0px 5px #C0C0C0"}} onClick={()=>this.drawerRef.current.handleOpen(plat)}/>
                   </Flex>
               </Flex>
           </Container>
@@ -60,6 +62,7 @@ export default class Plats extends React.Component {
                         {plats.map(this.renderPlats)}
                     </ScaleFade>
                 </Flex>
+                <PlatsDrawer ref={this.drawerRef} panier={this.props.panier}/>
             </>
         );
     }
