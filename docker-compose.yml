@@ -141,3 +141,19 @@ services:
       - commandes-db
     expose:
       - 3000
+
+  front-end:
+    container_name: front-end
+    image: 'node:17-alpine'
+    env_file:
+      - ./front-end/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './front-end:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3000:3000'
+    networks:
+      - goodfood
+    expose:
+      - 3000

@@ -63,7 +63,7 @@ export default class MonPanier extends React.Component{
             await instanceCommandes.post("/",{
                 id_restaurant:this.props.restaurant.id,
                 id_client:id_client,
-                horraire:this.state.horraire.format("HH:mm"),
+                horraire:this.state.horraire.format('LLL'),
                 plats:this.props.panier.current.getPlatsWithoutImg().map(JSON.stringify),
                 prix:parseFloat(this.props.panier.current.calculTotalPanier()),
                 etat:"commander"

@@ -16,7 +16,7 @@ const verifyToken = async (token)=>{
   if(!token) return false;
   let res=true;
   try{
-    await fetch("http://localhost:3002/verify",{
+    await fetch(process.env.AUTH_API+"/verify",{
       method:"POST",
       body:JSON.stringify({token:token}),
       headers: {

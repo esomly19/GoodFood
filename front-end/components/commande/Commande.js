@@ -7,6 +7,7 @@ import {IoFastFoodSharp} from "react-icons/io5";
 import {RiAccountCircleFill} from "react-icons/ri";
 import Plats from "./Plats";
 import MonPanier from "./MonPanier";
+import Profil from "./Profil";
 
 export default class Commande extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class Commande extends React.Component {
                 {state === "plats" ?
                     <Plats ref={this.platsRef} panier={this.panierRef} restaurant={this.props.restaurant}/> :
                     state === "panier" ? <MonPanier panier={this.panierRef} restaurant={this.props.restaurant}/> :
-                        state === "compte" ? <></> : null
+                        state === "compte" ? <Profil/> : null
                 }
                 <Flex marginTop={"auto"} paddingTop={5} flexDirection={"row"} bg={"goodfood.grey"}
                       justifyContent={"space-between"} margin={0} paddingBottom={5} paddingLeft={50} paddingRight={50}>

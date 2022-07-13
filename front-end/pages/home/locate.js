@@ -3,11 +3,8 @@ import { Button, Container, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import GoogleMapReact from 'google-map-react';
 import { MdDinnerDining } from 'react-icons/md';
 import Router from 'next/router';
-import {BiRestaurant} from "react-icons/bi";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {instanceRestaurant} from "../../utils/axiosInstance";
-
-const Marker = ({ onClick }) => <BiRestaurant size={25} color={"red"} onClick={onClick} style={{cursor:"pointer"}}/>;
 
 const GEOCODE = {
   Nancy:{
@@ -58,10 +55,9 @@ export default function locate(props){
             defaultCenter={GEOCODE.Nancy}
             defaultZoom={11}>
             {restaurants.map((restaurant,index)=>{
-              return <Marker key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)}/>;
+              return <Image key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"}/>;
             })
             }
-
           </GoogleMapReact>
         </Flex>
         {
@@ -87,3 +83,21 @@ export default function locate(props){
     </HomeLayout>
   );
 }
+
+const K_WIDTH = 40;
+const K_HEIGHT = 40;
+
+const greatPlaceStyle = {
+  // initially any map object has left top corner at lat lng coordinates
+  // it's on you to set object origin to 0,0 coordinates
+  position: 'absolute',
+  width: K_WIDTH,
+  height: K_HEIGHT,
+  left: -K_WIDTH / 2,
+  top: -K_HEIGHT / 2,
+  cursor:"pointer",
+
+  textAlign: 'center',
+
+  padding: 4
+};
