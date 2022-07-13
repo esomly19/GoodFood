@@ -94,10 +94,11 @@ export default class Plats extends React.Component {
                         <InputRightElement children={<AiOutlineSearch style={{cursor: "pointer"}}/>}/>
                     </InputGroup>
                     <HStack spacing={2} marginY={4} overflow={"scroll"}>
-                        {tags.map((tag)=>{
+                        {tags.map((tag,key)=>{
                             let isSelected=selectedTags.includes(tag);
                             return(
                                 <Tag
+                                    key={key}
                                     borderRadius='full'
                                     variant='solid'
                                     bg={isSelected?"white":"none"}

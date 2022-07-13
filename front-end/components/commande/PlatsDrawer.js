@@ -41,7 +41,7 @@ export default class PlatsDrawer extends React.Component {
         const {plat,selectedSupplements,quantite} = this.state;
         let finalPlat =plat;
         finalPlat.quantite = quantite;
-        finalPlat.selectedSupplements = selectedSupplements;
+        finalPlat.selectedSupplements = selectedSupplements.map((supplement)=>({...supplement.value}));
         this.props.panier.current.addPlat(finalPlat,this.handleClose);
     }
 

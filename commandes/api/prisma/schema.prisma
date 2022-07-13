@@ -15,5 +15,5 @@ model Commande {
   horraire      String
   plats         String[]
   etat          String?
-  prix          Int
+  prix          Float
 }

@@ -17,3 +17,9 @@ export const instancePlat = axios.create({
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });
+
+export const instanceCommandes = axios.create({
+  baseURL: 'http://localhost:3005',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});

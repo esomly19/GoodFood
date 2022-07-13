@@ -1,14 +1,15 @@
 import React from "react";
-import {Box, Button, Center, Fade, Flex, Heading, Image, Text} from "@chakra-ui/react";
+import {Button, Center, Flex, Heading, Image, Text} from "@chakra-ui/react";
 import {AiOutlineMinus, AiOutlinePlus, AiOutlineShopping} from "react-icons/ai";
-import Router from "next/router";
 import {BsArrowRight} from "react-icons/bs";
 import "react-datetime/css/react-datetime.css";
 import 'moment/locale/fr';
-
+import jwt from 'jwt-decode'
 import Datetime from 'react-datetime';
 import Lottie from "lottie-react";
 import successAnimation from "../../lottie-json/success-animation.json";
+import {instanceCommandes} from "../../utils/axiosInstance";
+import {parseCookies} from "nookies";
 
 export default class MonPanier extends React.Component{
     constructor(props) {
@@ -22,11 +23,11 @@ export default class MonPanier extends React.Component{
         let {panier}=this.props;
         panier=panier.current;
         return (
-          <Flex h={"80px"} mt={2}>
+          <Flex h={"80px"} mt={2} key={index}>
               <Image objectFit='cover' src={plat.image} fallbackSrc='https://via.placeholder.com/150'  width={"20%"} borderRadius={5}/>
               <Flex alignItems={"center"} justifyContent={"space-between"} width={"100%"}>
                   <Text w={"40%"} pl={5}> {plat.nom} <Text as={"i"} fontSize='xs'>{plat.selectedSupplements.length?"(avec suppléments)":""}</Text> </Text>
-                  <Flex w={"33%"} size='sm' isAttached variant='outline'paddingX={5}>
+                  <Flex w={"33%"} size='sm' variant='outline'paddingX={5}>
                       <span
                           style={{borderTopLeftRadius:10,borderBottomLeftRadius:10,borderRight:"none"}}
                           className={"button-panier"}
@@ -55,9 +56,25 @@ export default class MonPanier extends React.Component{
         this.setState({});
     }
 
-    commander = () => {
-        this.props.panier.current.refresh()
-        this.setState({status:"sent"})
+    commander = async () => {
+        try{
+            const cookies = parseCookies()
+            let id_client= jwt(cookies.token).id;
+            await instanceCommandes.post("/",{
+                id_restaurant:this.props.restaurant.id,
+                id_client:id_client,
+                horraire:this.state.horraire.format("HH:mm"),
+                plats:this.props.panier.current.getPlatsWithoutImg().map(JSON.stringify),
+                prix:parseFloat(this.props.panier.current.calculTotalPanier()),
+                etat:"commander"
+            });
+            this.props.panier.current.refresh()
+            this.setState({status:"sent"})
+        }
+        catch (e) {
+            console.log(e)
+            this.setState({status: null});
+        }
     }
 
 
@@ -65,7 +82,7 @@ export default class MonPanier extends React.Component{
         const {panier,restaurant}=this.props;
         const {horraire,status}=this.state;
         const plats=panier.current.getPlats();
-        if(status) return(
+        if(status==="sent") return(
             <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"}>
                 <Flex  h={"99%"} flexDirection={"column"}>
                     <Lottie animationData={successAnimation} />;
@@ -116,7 +133,8 @@ export default class MonPanier extends React.Component{
                                 <Heading >Total: {panier.current.calculTotalPanier()}€</Heading>
                                 <Center>
                                     <Button
-                                        disabled={!horraire}
+                                        disabled={!horraire||status==="en cours"}
+                                        isLoading={status==="en cours"}
                                         bg={"goodfood.red"}
                                         paddingLeft={10}
                                         color={"goodfood.white"}
@@ -125,7 +143,7 @@ export default class MonPanier extends React.Component{
                                         width={"100vw"}
                                         borderRadius={"100"}
                                         marginY={10}
-                                        onClick={this.commander}>
+                                        onClick={()=>this.setState({status:"en cours"},this.commander)}>
                                         Commander &nbsp;&nbsp;&nbsp;
                                         <BsArrowRight/>
                                     </Button>

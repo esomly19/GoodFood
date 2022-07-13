@@ -43,7 +43,7 @@ export default class Panier extends React.Component {
         let plat = this.state.plats[index];
 
         let prix = plat.prix_ttc;
-        let supplements = plat.selectedSupplements.length?plat.selectedSupplements.map((supplement)=>supplement.value.prix).reduce((acc,supplement)=>acc+supplement):0;
+        let supplements = plat.selectedSupplements.length?plat.selectedSupplements.map((supplement)=>supplement.prix).reduce((acc,supplement)=>acc+supplement):0;
         return (plat.quantite * (prix + supplements)).toFixed(2);
     }
 
@@ -54,6 +54,12 @@ export default class Panier extends React.Component {
 
     getPlats() {
         return this.state.plats;
+    }
+
+    getPlatsWithoutImg() {
+        let copy = [...this.state.plats]
+        copy = copy.map((plat)=>({...plat,image:undefined}));
+        return copy;
     }
 
     getNbPlats(){
