@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Commande {
+  id            Int      @id @default(autoincrement())
+  id_restaurant Int
+  id_client     Int
+  horraire      String
+  plats         String[]
+  etat          String?
+  prix          Float
+}

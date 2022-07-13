@@ -59,3 +59,20 @@ a {
   margin-right: 5px;
 }
 ::-webkit-scrollbar {display:none;}
+
+.button-panier{
+  width:33%;
+  justify-content:center;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  border-width:1px;
+  transition: 0.3s;
+  margin-left: -1px;
+  border-color: #FF724C;
+}
+
+.button-panier:hover{
+  background-color:#FF724C ;
+  color:white;
+}

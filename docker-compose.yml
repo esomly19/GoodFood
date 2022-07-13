@@ -6,13 +6,12 @@ services:
     container_name: users-db
     image: postgres
     restart: always
-    env_file:
-      - ./users/db/.env
+    environment:
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prismagoodfood
+      - POSTGRES_DB=users
     volumes:
       - './users/db/data:/var/lib/postgresql/data'
-      - './users/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
-    ports:
-      - '5432:5432'
     networks:
       - goodfood
 
@@ -20,13 +19,12 @@ services:
     container_name: restaurants-db
     image: postgres
     restart: always
-    env_file:
-      - ./restaurants/db/.env
+    environment:
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prismagoodfood
+      - POSTGRES_DB=restaurants
     volumes:
       - './restaurants/db/data:/var/lib/postgresql/data'
-      - './restaurants/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
-    ports:
-      - '5433:5432'
     networks:
       - goodfood
 
@@ -34,84 +32,100 @@ services:
     container_name: plats-db
     image: postgres
     restart: always
-    env_file:
-      - ./plats/db/.env
+    environment:
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prismagoodfood
+      - POSTGRES_DB=plats
     volumes:
       - './plats/db/data:/var/lib/postgresql/data'
-      - './plats/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
-    ports:
-      - '5434:5432'
+    networks:
+      - goodfood
+
+  commandes-db:
+    container_name: commandes-db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prismagoodfood
+      - POSTGRES_DB=commandes
+    volumes:
+      - './commandes/db/data:/var/lib/postgresql/data'
     networks:
       - goodfood
 
   users-api:
+    stdin_open: true
+    build:
+      context: './users/api'
+      dockerfile: Dockerfile
     container_name: users-api
-    image: 'node:17-alpine'
-    env_file:
-      - ./users/api/.env
-    working_dir: /usr/src/app
-    volumes:
-      - './users/api:/usr/src/app'
-    command: npm run dev
     ports:
-      - '3001:3001'
+      - '3001:3000'
     networks:
       - goodfood
     depends_on:
       - users-db
-    expose:
-      - 3001
 
   auth-api:
+    stdin_open: true
+    build:
+      context: './auth/api'
+      dockerfile: Dockerfile
     container_name: auth-api
-    image: 'node:17-alpine'
-    env_file:
-      - ./auth/api/.env
-    working_dir: /usr/src/app
-    volumes:
-      - './auth/api:/usr/src/app'
-    command: npm run dev
     ports:
-      - '3002:3002'
+      - '3002:3000'
     networks:
       - goodfood
     depends_on:
       - users-api
-    expose:
-      - 3002
-
-  plats-api:
-    container_name: plats-api
-    image: 'node:17-alpine'
-    env_file:
-      - ./plats/api/.env
-    working_dir: /usr/src/app
-    volumes:
-      - './plats/api:/usr/src/app'
-    command: npm run dev
-    ports:
-      - '3004:3004'
-    networks:
-      - goodfood
-    depends_on:
-      - plats-db
-    expose:
-      - 3004
 
   restaurants-api:
+    stdin_open: true
+    build:
+      context: './restaurants/api'
+      dockerfile: Dockerfile
     container_name: restaurants-api
-    image: 'node:17-alpine'
-    env_file:
-      - ./restaurants/api/.env
-    working_dir: /usr/src/app
-    volumes:
-      - './restaurants/api:/usr/src/app'
-    command: npm run dev
     ports:
-      - '3003:3003'
+      - '3003:3000'
     networks:
       - goodfood
     depends_on:
       - restaurants-db
-    expose:
-      - 3003
+
+  plats-api:
+    stdin_open: true
+    build:
+      context: './plats/api'
+      dockerfile: Dockerfile
+    container_name: plats-api
+    ports:
+      - '3004:3000'
+    networks:
+      - goodfood
+    depends_on:
+      - plats-db
+
+  commandes-api:
+    stdin_open: true
+    build:
+      context: './commandes/api'
+      dockerfile: Dockerfile
+    container_name: commandes-api
+    ports:
+      - '3005:3000'
+    networks:
+      - goodfood
+    depends_on:
+      - commandes-db
+
+  front-end:
+    stdin_open: true
+    build:
+      context: './front-end'
+      dockerfile: Dockerfile
+    container_name: commandes-api
+    ports:
+      - '80:3000'
+    networks:
+      - goodfood

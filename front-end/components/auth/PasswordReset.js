@@ -31,8 +31,9 @@ export default class PasswordReset extends Component{
                 pointerEvents='none'
                 color='gray.300'
                 fontSize='1.2em'
-                children={<FiMail/>}
-              />
+              >
+                <FiMail/>
+              </InputLeftElement>
               <Input type={"email"} placeholder='Email' />
             </InputGroup>
           </Stack>

@@ -42,7 +42,7 @@ export default class Auth extends Component{
       <div className={"auth"}>
           <Container bg={"goodfood.grey"} className={"container-auth"} borderBottomRadius={10}>
             <div className={"container-auth-header"}>
-              <Image src={"/goodfood-01.svg"}/>
+              <Image src={"/goodfood-01.svg"} alt={"logo"}/>
               <Flex w={"100%"} justifyContent={"center"}>
                 <Flex justifyContent={"space-between"} w={"75%"}>
                   <Text className={"auth-button "+((selected===STATUS.login||selected===STATUS.reset)&&"selected")} onClick={this.handleSelected.bind(this,STATUS.login)}>{"Se connecter"}</Text>

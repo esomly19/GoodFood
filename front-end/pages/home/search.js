@@ -16,18 +16,14 @@ import {useEffect, useState} from 'react';
 import { GoLocation } from 'react-icons/go';
 import { FaSearchLocation } from 'react-icons/fa';
 import Router from 'next/router';
-import {instanceRestaurant} from "../../utils/axiosInstance";
+import {instanceRestaurant, instanceUsers} from "../../utils/axiosInstance";
+import jwt from "jwt-decode";
 
 
-export default function search(props){
-  const [restaurants,setRestaurants]=useState([]);
+export default function Search(props){
+  const {restaurants}=props;
   const [restaurant,setRestaurant]=useState(null);
   const [search,setSearch] = useState("");
-
-  useEffect(async ()=>{
-      let {data}=await instanceRestaurant.get("/");
-      setRestaurants(data);
-  },[])
 
   const renderRestaurants = (resto,index) =>{
     if(!resto.ville.toUpperCase().includes(search.toUpperCase()))return null;
@@ -47,7 +43,7 @@ export default function search(props){
   return(
     <HomeLayout>
       <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
-        <Image src={"/goodfood-apple.svg"}/>
+        <Image src={"/goodfood-apple.svg"} alt={"logo"}/>
       </Flex>
       <Container h={"90vh"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10}>
        <Flex padding={10} flexDirection={"column"} maxHeight={"100%"}>
@@ -56,7 +52,7 @@ export default function search(props){
          </Heading>
          <InputGroup marginTop={10}>
            <Input placeholder='Chercher un restaurant...' value={search} onChange={({target})=>setSearch(target.value)} />
-           <InputRightElement children={<AiOutlineSearch style={{cursor:"pointer"}}/>} />
+             <InputRightElement><AiOutlineSearch style={{cursor:"pointer"}}/></InputRightElement>
          </InputGroup>
          <Flex height={"100%"} flexDirection={"column"} overflowY={"scroll"} marginTop={10}  borderColor={"goodfood.blue"} borderWidth={1} borderRadius={10}>
            {
@@ -79,5 +75,11 @@ export default function search(props){
     </HomeLayout>
 
   );
+}
 
+export async function getServerSideProps(context) {
+    let {data}=await instanceRestaurant.get("/");
+    return {
+        props: {restaurants:data}, // will be passed to the page component as props
+    }
 }

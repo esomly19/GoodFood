@@ -42,7 +42,7 @@ export default class Register extends Component{
       return (
         <ScaleFade initialScale={0.9} in={true}>
           <Container textAlign={"center"} w={'80%'} height={"100%"}>
-            <Flex flexDirection={"row"} mt={5} justifyContent={"center"} alignItems={"center"} flexDirection={"column"}>
+            <Flex flexDirection={"row"} mt={5} justifyContent={"center"} alignItems={"center"} >
               <Lottie animationData={successAnimation} />;
               <Button margin={10} bg={"goodfood.red"} color={"goodfood.white"} w={"80%"} borderRadius={"100"} onClick={this.props.login}>
                 {"Se connecter"}
