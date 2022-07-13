@@ -7,7 +7,7 @@ import {parseCookies} from "nookies";
 import jwt from "jwt-decode";
 import {capitalizeFirstLetter} from "../../utils/stringUtils";
 
-export default function home(props){
+export default function Home(props){
     const [user,setUser]=useState(null);
     useEffect(() => {
         // declare the data fetching function

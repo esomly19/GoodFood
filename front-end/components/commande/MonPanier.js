@@ -24,7 +24,7 @@ export default class MonPanier extends React.Component{
         panier=panier.current;
         return (
           <Flex h={"80px"} mt={2} key={index}>
-              <Image objectFit='cover' src={plat.image} fallbackSrc='https://via.placeholder.com/150'  width={"20%"} borderRadius={5}/>
+              <Image objectFit='cover' src={plat.image} fallbackSrc='https://via.placeholder.com/150'  width={"20%"} borderRadius={5} alt={"logo"}/>
               <Flex alignItems={"center"} justifyContent={"space-between"} width={"100%"}>
                   <Text w={"40%"} pl={5}> {plat.nom} <Text as={"i"} fontSize='xs'>{plat.selectedSupplements.length?"(avec suppléments)":""}</Text> </Text>
                   <Flex w={"33%"} size='sm' variant='outline'paddingX={5}>
@@ -106,7 +106,7 @@ export default class MonPanier extends React.Component{
                         </Flex>
                     </Flex>
                     <Flex bg={"goodfood.yellow"} color={"goodfood.blue"} marginX={10} borderRadius={20} marginY={2}>
-                        <Image src={"/goodfood-apple.svg"} w={20} m={2}/>
+                        <Image src={"/goodfood-apple.svg"} w={20} m={2} alt={"logo"}/>
                         <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
                             <Heading size={"xs"}>{restaurant.ville+", "+restaurant.pays}</Heading>
                             <Text>{restaurant.adresse}</Text>

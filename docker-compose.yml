@@ -150,7 +150,7 @@ services:
     working_dir: /usr/src/app
     volumes:
       - './front-end:/usr/src/app'
-    command: npm run dev
+    command: npm start
     ports:
       - '3000:3000'
     networks:

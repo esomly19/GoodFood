@@ -65,7 +65,7 @@ export default class Plats extends React.Component {
     renderPlats = (plat,index)=>{
         return(
           <Container key={index} marginTop={10} borderRadius={20} p={0} flexDirection={"row"} bg={"goodfood.white"}>
-              <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}  objectFit='cover'/>
+              <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}  objectFit='cover' alt={"logo"}/>
               <Flex flexDirection={"column"} pl={5} pr={5}>
                   <Text as={"i"} fontSize={15} mt={2}>{"Cuisine "+plat.cuisine}</Text>
               <Flex justifyContent={"space-between"}>
@@ -91,7 +91,7 @@ export default class Plats extends React.Component {
                 <Flex flexDirection={"column"}marginX={10} mt={10}>
                     <InputGroup >
                         <Input bg={"goodfood.white"} placeholder='Chercher un plat...' value={search} onChange={this.handleSearch}/>
-                        <InputRightElement children={<AiOutlineSearch style={{cursor: "pointer"}}/>}/>
+                        <InputRightElement><AiOutlineSearch style={{cursor: "pointer"}}/></InputRightElement>
                     </InputGroup>
                     <HStack spacing={2} marginY={4} overflow={"scroll"}>
                         {tags.map((tag,key)=>{

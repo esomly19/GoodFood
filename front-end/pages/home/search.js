@@ -19,14 +19,17 @@ import Router from 'next/router';
 import {instanceRestaurant} from "../../utils/axiosInstance";
 
 
-export default function search(props){
+export default function Search(props){
   const [restaurants,setRestaurants]=useState([]);
   const [restaurant,setRestaurant]=useState(null);
   const [search,setSearch] = useState("");
 
-  useEffect(async ()=>{
-      let {data}=await instanceRestaurant.get("/");
-      setRestaurants(data);
+  useEffect( ()=>{
+      async function fetchData(){
+          let {data}=await instanceRestaurant.get("/");
+          setRestaurants(data);
+      }
+      fetchData().catch(console.error);
   },[])
 
   const renderRestaurants = (resto,index) =>{
@@ -47,7 +50,7 @@ export default function search(props){
   return(
     <HomeLayout>
       <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
-        <Image src={"/goodfood-apple.svg"}/>
+        <Image src={"/goodfood-apple.svg"} alt={"logo"}/>
       </Flex>
       <Container h={"90vh"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10}>
        <Flex padding={10} flexDirection={"column"} maxHeight={"100%"}>
@@ -56,7 +59,7 @@ export default function search(props){
          </Heading>
          <InputGroup marginTop={10}>
            <Input placeholder='Chercher un restaurant...' value={search} onChange={({target})=>setSearch(target.value)} />
-           <InputRightElement children={<AiOutlineSearch style={{cursor:"pointer"}}/>} />
+             <InputRightElement><AiOutlineSearch style={{cursor:"pointer"}}/></InputRightElement>
          </InputGroup>
          <Flex height={"100%"} flexDirection={"column"} overflowY={"scroll"} marginTop={10}  borderColor={"goodfood.blue"} borderWidth={1} borderRadius={10}>
            {

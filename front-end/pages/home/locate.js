@@ -33,19 +33,22 @@ const GEOCODE = {
   }
 }
 
-export default function locate(props){
+export default function Locate(props){
   const [restaurants,setRestaurants]=useState([]);
   const [restaurant,setRestaurant]=useState(null);
 
-  useEffect(async ()=>{
-    let {data}=await instanceRestaurant.get("/");
-    setRestaurants(data);
+  useEffect( ()=>{
+    async function fetchData (){
+      let {data}=await instanceRestaurant.get("/");
+      setRestaurants(data);
+    }
+    fetchData().catch(console.error);
   },[])
 
   return(
     <HomeLayout>
       <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
-        <Image src={"/goodfood-apple.svg"}/>
+        <Image src={"/goodfood-apple.svg"} alt={"logo"}/>
       </Flex>
       <Container h={"90vh"} bg={"goodfood.grey"} className={"container-auth"} borderTopRadius={10}>
         <Flex position={"relative"} height={"60vh"} width={"100%"} borderTopRadius={10} overflow={"hidden"}>
@@ -55,7 +58,7 @@ export default function locate(props){
             defaultCenter={GEOCODE.Nancy}
             defaultZoom={11}>
             {restaurants.map((restaurant,index)=>{
-              return <Image key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"}/>;
+              return <Image key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"} alt={"logo"}/>;
             })
             }
           </GoogleMapReact>

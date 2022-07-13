@@ -23,7 +23,7 @@ export default class Profil extends React.Component {
 
     renderCommande = (commande) =>{
         const {etat,id,prix,horraire}=commande;
-        let color = etat==="commander"?"#FF724C":etat==="livrer"?"green":etat==="annuler"?"red":"";
+        let color = etat==="commander"?"#FF724C":etat==="livrer"?"green":etat==="annuler"?"red":"white";
         let status = etat==="commander"?"Commandée":etat==="livrer"?"Livrée":etat==="annuler"?"Annulée":"";
         return (
                 <Flex m={5} borderWidth={1} borderColor={"goodfood.blue"} borderRadius={20} p={2} flexDirection={"row"} fontSize={"sm"}>
