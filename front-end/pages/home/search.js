@@ -16,21 +16,14 @@ import {useEffect, useState} from 'react';
 import { GoLocation } from 'react-icons/go';
 import { FaSearchLocation } from 'react-icons/fa';
 import Router from 'next/router';
-import {instanceRestaurant} from "../../utils/axiosInstance";
+import {instanceRestaurant, instanceUsers} from "../../utils/axiosInstance";
+import jwt from "jwt-decode";
 
 
 export default function Search(props){
-  const [restaurants,setRestaurants]=useState([]);
+  const {restaurants}=props;
   const [restaurant,setRestaurant]=useState(null);
   const [search,setSearch] = useState("");
-
-  useEffect( ()=>{
-      async function fetchData(){
-          let {data}=await instanceRestaurant.get("/");
-          setRestaurants(data);
-      }
-      fetchData().catch(console.error);
-  },[])
 
   const renderRestaurants = (resto,index) =>{
     if(!resto.ville.toUpperCase().includes(search.toUpperCase()))return null;
@@ -82,5 +75,11 @@ export default function Search(props){
     </HomeLayout>
 
   );
+}
 
+export async function getServerSideProps(context) {
+    let {data}=await instanceRestaurant.get("/");
+    return {
+        props: {restaurants:data}, // will be passed to the page component as props
+    }
 }

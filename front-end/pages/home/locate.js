@@ -3,7 +3,7 @@ import { Button, Container, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import GoogleMapReact from 'google-map-react';
 import { MdDinnerDining } from 'react-icons/md';
 import Router from 'next/router';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {instanceRestaurant} from "../../utils/axiosInstance";
 
 const GEOCODE = {
@@ -34,16 +34,7 @@ const GEOCODE = {
 }
 
 export default function Locate(props){
-  const [restaurants,setRestaurants]=useState([]);
   const [restaurant,setRestaurant]=useState(null);
-
-  useEffect( ()=>{
-    async function fetchData (){
-      let {data}=await instanceRestaurant.get("/");
-      setRestaurants(data);
-    }
-    fetchData().catch(console.error);
-  },[])
 
   return(
     <HomeLayout>
@@ -57,7 +48,7 @@ export default function Locate(props){
             bootstrapURLKeys={{ key: "" }}
             defaultCenter={GEOCODE.Nancy}
             defaultZoom={11}>
-            {restaurants.map((restaurant,index)=>{
+            {props.restaurants?.map((restaurant,index)=>{
               return <Image key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"} alt={"logo"}/>;
             })
             }
@@ -87,6 +78,13 @@ export default function Locate(props){
   );
 }
 
+export async function getServerSideProps(context) {
+  let {data}=await instanceRestaurant.get("/");
+
+  return {
+    props: {restaurants:data}, // will be passed to the page component as props
+  }
+}
 const K_WIDTH = 40;
 const K_HEIGHT = 40;
 

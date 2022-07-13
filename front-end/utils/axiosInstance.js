@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: process.env.AUTH_API,
+  baseURL:"/api/auth/",
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });
 
 export const instanceRestaurant = axios.create({
   baseURL: process.env.RESTAURANTS_API,
-  timeout: 1000,
+  timeout: 10000,
   headers: {'X-Custom-Header': 'foobar'}
 });
 
@@ -19,7 +19,7 @@ export const instancePlat = axios.create({
 });
 
 export const instanceCommandes = axios.create({
-  baseURL: process.env.COMMANDES_API,
+  baseURL: '/api/commandes',
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });

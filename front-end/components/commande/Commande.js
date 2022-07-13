@@ -1,13 +1,14 @@
 import Panier from "./Panier";
 import React from "react";
-import {Container, Flex, Input, InputGroup, InputRightElement, ScaleFade} from "@chakra-ui/react";
-import {AiOutlineSearch} from "react-icons/ai";
+import { Flex } from "@chakra-ui/react";
+
 import {BsBasket2Fill} from "react-icons/bs";
 import {IoFastFoodSharp} from "react-icons/io5";
 import {RiAccountCircleFill} from "react-icons/ri";
 import Plats from "./Plats";
 import MonPanier from "./MonPanier";
 import Profil from "./Profil";
+
 
 export default class Commande extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export default class Commande extends React.Component {
         return (
             <Flex h={"100%"} flexDirection={"column"} >
                 {state === "plats" ?
-                    <Plats ref={this.platsRef} panier={this.panierRef} restaurant={this.props.restaurant}/> :
+                    <Plats ref={this.platsRef} panier={this.panierRef} restaurant={this.props.restaurant} plats={this.props.plats}/> :
                     state === "panier" ? <MonPanier panier={this.panierRef} restaurant={this.props.restaurant}/> :
                         state === "compte" ? <Profil/> : null
                 }

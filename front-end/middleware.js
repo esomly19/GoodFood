@@ -6,7 +6,7 @@ export async function middleware(request) {
   const url = request.nextUrl.clone()
   const requestUrl = request.nextUrl.pathname;
   //Eviter les images et les webpack next
-  if (!requestUrl.startsWith('/auth')&&!requestUrl.startsWith('/commande')&&!requestUrl.startsWith('/home')&& requestUrl!=='/') return NextResponse.next();
+  if (!requestUrl.startsWith('/auth')&&!requestUrl.startsWith('/commande')&&!requestUrl.startsWith('/home')&&requestUrl!=='/') return NextResponse.next();
 
   //Si le token sont valides
   if(validToken && (!requestUrl.startsWith('/auth') && requestUrl!=='/')){

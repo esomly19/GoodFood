@@ -12,7 +12,7 @@ import {
     Text,
     HStack
 } from "@chakra-ui/react";
-import {instancePlat} from "../../utils/axiosInstance";
+
 import {AiFillStar, AiOutlineSearch} from "react-icons/ai";
 
 import {BsFillPlusCircleFill} from "react-icons/bs";
@@ -32,10 +32,10 @@ export default class Plats extends React.Component {
     }
 
 
-    async componentDidMount() {
-        const {data}=await instancePlat.post("/id",{restaurant_id:this.props.restaurant.id});
-        let tags = data.reduce( (result, plat) => result.concat(plat.tags) , []);
-        this.setState({plats:data,platsOrigin:data, tags:[...new Set(tags)]});
+    componentDidMount() {
+        let plats = [...this.props.plats]
+        let tags = plats.reduce( (result, plat) => result.concat(plat.tags) , []);
+        this.setState({plats:plats,platsOrigin:plats, tags:[...new Set(tags)]});
     }
 
     handleClickTag = (tag) =>{
