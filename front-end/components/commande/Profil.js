@@ -1,9 +1,8 @@
 import React from 'react';
-import {Box, Button, Center, Divider, Flex, Heading, Text} from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, Text} from "@chakra-ui/react";
 import {instanceCommandes} from "../../utils/axiosInstance";
 import {parseCookies} from "nookies";
 import jwt from "jwt-decode";
-import {BsFillPlusCircleFill} from "react-icons/bs";
 import Router from "next/router";
 
 export default class Profil extends React.Component {
@@ -21,12 +20,12 @@ export default class Profil extends React.Component {
         this.setState({commandes:data});
     }
 
-    renderCommande = (commande) =>{
+    renderCommande = (commande,key) =>{
         const {etat,id,prix,horraire}=commande;
         let color = etat==="commander"?"#FF724C":etat==="livrer"?"green":etat==="annuler"?"red":"white";
         let status = etat==="commander"?"Commandée":etat==="livrer"?"Livrée":etat==="annuler"?"Annulée":"";
         return (
-                <Flex m={5} borderWidth={1} borderColor={"goodfood.blue"} borderRadius={20} p={2} flexDirection={"row"} fontSize={"sm"}>
+                <Flex key={key} m={5} borderWidth={1} borderColor={"goodfood.blue"} borderRadius={20} p={2} flexDirection={"row"} fontSize={"sm"}>
                     <Flex flex={3}  style={{fontWeight: "bold"}} justifyContent={"space-between"} flexDirection={"column"}>
                         <Text>Commande: #{ ('000000'+id).slice(-6)}</Text>
                         <Text color={"goodfood.red"}>{prix}€</Text>
