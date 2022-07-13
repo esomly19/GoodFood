@@ -7,12 +7,15 @@ import "react-datetime/css/react-datetime.css";
 import 'moment/locale/fr';
 
 import Datetime from 'react-datetime';
+import Lottie from "lottie-react";
+import successAnimation from "../../lottie-json/success-animation.json";
 
 export default class MonPanier extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            horraire: null
+            horraire: null,
+            status: null
         }
     }
     renderPlats = (plat,index) => {
@@ -52,12 +55,28 @@ export default class MonPanier extends React.Component{
         this.setState({});
     }
 
+    commander = () => {
+        this.props.panier.current.refresh()
+        this.setState({status:"sent"})
+    }
+
 
     render() {
         const {panier,restaurant}=this.props;
-        const {horraire}=this.state;
+        const {horraire,status}=this.state;
         const plats=panier.current.getPlats();
-        console.log(this.props)
+        if(status) return(
+            <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"}>
+                <Flex  h={"99%"} flexDirection={"column"}>
+                    <Lottie animationData={successAnimation} />;
+                    <Center>
+                        <Heading>Merci de votre commande</Heading>
+                    </Center>
+                </Flex>
+            </Flex>
+        );
+
+
         return(
 
             <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"}>
@@ -82,7 +101,7 @@ export default class MonPanier extends React.Component{
                                 style={{backgroundColor:"red"}}
                                 dateFormat={false}
                                 value={horraire}
-                                onClick={(data)=>this.setState({horraire:data})}
+                                onChange={(data)=>this.setState({horraire:data})}
                                 inputProps={{ placeholder: "Sélectionner un horraire" ,style: { borderRadius:20,padding:5,textAlign: "center"}}}/>
                         </Center>
 
@@ -97,6 +116,7 @@ export default class MonPanier extends React.Component{
                                 <Heading >Total: {panier.current.calculTotalPanier()}€</Heading>
                                 <Center>
                                     <Button
+                                        disabled={!horraire}
                                         bg={"goodfood.red"}
                                         paddingLeft={10}
                                         color={"goodfood.white"}
@@ -105,7 +125,7 @@ export default class MonPanier extends React.Component{
                                         width={"100vw"}
                                         borderRadius={"100"}
                                         marginY={10}
-                                        onClick={()=>Router.push("/home/search")}>
+                                        onClick={this.commander}>
                                         Commander &nbsp;&nbsp;&nbsp;
                                         <BsArrowRight/>
                                     </Button>

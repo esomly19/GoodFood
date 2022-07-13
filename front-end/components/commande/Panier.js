@@ -9,6 +9,10 @@ export default class Panier extends React.Component {
         }
     }
 
+    refresh(){
+        this.setState({plats:[]})
+    }
+
     addPlat(plat, callback) {
         this.setState({
             plats: [...this.state.plats, plat]

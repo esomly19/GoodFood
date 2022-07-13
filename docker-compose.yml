@@ -38,6 +38,20 @@ services:
     networks:
       - goodfood
 
+  commandes-db:
+    container_name: commandes-db
+    image: postgres
+    restart: always
+    env_file:
+      - ./commandes/db/.env
+    volumes:
+      - './commandes/db/data:/var/lib/postgresql/data'
+      - './commandes/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql'
+    networks:
+      - goodfood
+    ports:
+      - '5432:5432'
+
   users-api:
     container_name: users-api
     image: 'node:17-alpine'
@@ -74,6 +88,24 @@ services:
     expose:
       - 3000
 
+  restaurants-api:
+    container_name: restaurants-api
+    image: 'node:17-alpine'
+    env_file:
+      - ./restaurants/api/.env
+    working_dir: /usr/src/app
+    volumes:
+      - './restaurants/api:/usr/src/app'
+    command: npm run dev
+    ports:
+      - '3003:3000'
+    networks:
+      - goodfood
+    depends_on:
+      - restaurants-db
+    expose:
+      - 3000
+
   plats-api:
     container_name: plats-api
     image: 'node:17-alpine'
@@ -92,20 +124,20 @@ services:
     expose:
       - 3000
 
-  restaurants-api:
-    container_name: restaurants-api
+  commandes-api:
+    container_name: commandes-api
     image: 'node:17-alpine'
     env_file:
-      - ./restaurants/api/.env
+      - ./commandes/api/.env
     working_dir: /usr/src/app
     volumes:
-      - './restaurants/api:/usr/src/app'
+      - './commandes/api:/usr/src/app'
     command: npm run dev
     ports:
-      - '3003:3000'
+      - '3005:3000'
     networks:
       - goodfood
     depends_on:
-      - restaurants-db
+      - commandes-db
     expose:
       - 3000
