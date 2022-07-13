@@ -28,7 +28,7 @@ export default class Profil extends React.Component {
                 <Flex key={key} m={5} borderWidth={1} borderColor={"goodfood.blue"} borderRadius={20} p={2} flexDirection={"row"} fontSize={"sm"}>
                     <Flex flex={3}  style={{fontWeight: "bold"}} justifyContent={"space-between"} flexDirection={"column"}>
                         <Text>Commande: #{ ('000000'+id).slice(-6)}</Text>
-                        <Text color={"goodfood.red"}>{prix}€</Text>
+                        <Text color={"goodfood.red"}>{parseFloat(prix).toFixed(2)}€</Text>
                     </Flex>
                     <Flex flex={3} justifyContent={"space-between"} flexDirection={"column"} alignItems={"flex-end"}>
                         <Text as={"i"}>{horraire}</Text>
@@ -76,7 +76,6 @@ export default class Profil extends React.Component {
                             Compte
                         </Button>
                     </Center>
-
                 </Flex>
             </Flex>
         );
