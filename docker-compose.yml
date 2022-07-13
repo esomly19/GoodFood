@@ -56,6 +56,7 @@ services:
 
   users-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/users-api:latest'
     build:
       context: './users/api'
       dockerfile: Dockerfile
@@ -69,6 +70,7 @@ services:
 
   auth-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/auth-api:latest'
     build:
       context: './auth/api'
       dockerfile: Dockerfile
@@ -82,6 +84,7 @@ services:
 
   restaurants-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/restaurants-api:latest'
     build:
       context: './restaurants/api'
       dockerfile: Dockerfile
@@ -95,6 +98,7 @@ services:
 
   plats-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/plats-api:latest'
     build:
       context: './plats/api'
       dockerfile: Dockerfile
@@ -108,6 +112,7 @@ services:
 
   commandes-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/commandes-api:latest'
     build:
       context: './commandes/api'
       dockerfile: Dockerfile
@@ -121,10 +126,11 @@ services:
 
   front-end:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/front-end:latest'
     build:
       context: './front-end'
       dockerfile: Dockerfile
-    container_name: commandes-api
+    container_name: front-end
     ports:
       - '80:3000'
     networks:
