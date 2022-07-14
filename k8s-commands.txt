@@ -1,0 +1,9 @@
+Pods logs:
+kubectl get all
+kubectl logs pod/goodfood-59979d466-jwlsk
+
+Deployment:
+kubectl apply -f k8s-deployment.yaml
+
+Nodes:
+kubectl get nodes -o wide

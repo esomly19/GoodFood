@@ -10,8 +10,6 @@ services:
       - POSTGRES_USER=prisma
       - POSTGRES_PASSWORD=prismagoodfood
       - POSTGRES_DB=users
-    volumes:
-      - './users/db/data:/var/lib/postgresql/data'
     networks:
       - goodfood
 
@@ -23,8 +21,6 @@ services:
       - POSTGRES_USER=prisma
       - POSTGRES_PASSWORD=prismagoodfood
       - POSTGRES_DB=restaurants
-    volumes:
-      - './restaurants/db/data:/var/lib/postgresql/data'
     networks:
       - goodfood
 
@@ -36,8 +32,6 @@ services:
       - POSTGRES_USER=prisma
       - POSTGRES_PASSWORD=prismagoodfood
       - POSTGRES_DB=plats
-    volumes:
-      - './plats/db/data:/var/lib/postgresql/data'
     networks:
       - goodfood
 
@@ -49,15 +43,14 @@ services:
       - POSTGRES_USER=prisma
       - POSTGRES_PASSWORD=prismagoodfood
       - POSTGRES_DB=commandes
-    volumes:
-      - './commandes/db/data:/var/lib/postgresql/data'
     networks:
       - goodfood
 
   users-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/users-api:latest'
     build:
-      context: './users/api'
+      context: 'users-api'
       dockerfile: Dockerfile
     container_name: users-api
     ports:
@@ -69,8 +62,9 @@ services:
 
   auth-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/auth-api:latest'
     build:
-      context: './auth/api'
+      context: 'auth-api'
       dockerfile: Dockerfile
     container_name: auth-api
     ports:
@@ -82,8 +76,9 @@ services:
 
   restaurants-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/restaurants-api:latest'
     build:
-      context: './restaurants/api'
+      context: 'restaurants-api'
       dockerfile: Dockerfile
     container_name: restaurants-api
     ports:
@@ -95,8 +90,9 @@ services:
 
   plats-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/plats-api:latest'
     build:
-      context: './plats/api'
+      context: 'plats-api'
       dockerfile: Dockerfile
     container_name: plats-api
     ports:
@@ -108,8 +104,9 @@ services:
 
   commandes-api:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/commandes-api:latest'
     build:
-      context: './commandes/api'
+      context: 'commandes-api'
       dockerfile: Dockerfile
     container_name: commandes-api
     ports:
@@ -121,10 +118,11 @@ services:
 
   front-end:
     stdin_open: true
+    image: 'rg.fr-par.scw.cloud/goodfood/front-end:latest'
     build:
-      context: './front-end'
+      context: 'front-end'
       dockerfile: Dockerfile
-    container_name: commandes-api
+    container_name: front-end
     ports:
       - '80:3000'
     networks:
