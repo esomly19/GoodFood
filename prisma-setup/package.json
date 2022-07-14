@@ -1,0 +1,10 @@
+{
+  "name": "prisma-setup",
+  "version": "1.0.0",
+  "description": "Peupler les bdd",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "prisma": "^4.0.0"
+  }
+}
