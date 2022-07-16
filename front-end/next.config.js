@@ -1,5 +1,5 @@
 require("dotenv").config();
-let dev = process.env.ENV==='development';
+let dev = process.env.ENV !== "production";
 module.exports = {
   reactStrictMode: true,
   env:{

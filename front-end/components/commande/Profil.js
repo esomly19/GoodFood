@@ -46,6 +46,7 @@ export default class Profil extends React.Component {
                     <Heading>Profil</Heading>
                     <Heading size={"lg"} mt={2}>Mes commandes</Heading>
                     <Flex borderRadius={20} bg={"goodfood.white"} h={"50%"} marginY={4} overflowY={"scroll"}
+                          className={"scnone"}
                           style={{filter:"drop-shadow(0px 0px 5px #C0C0C0"}} flexDirection={"column"}>
                         {commandes.map(this.renderCommande)}
                     </Flex>

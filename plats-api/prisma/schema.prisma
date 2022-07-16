@@ -12,7 +12,7 @@ model Plat {
   id               Int     @id @default(autoincrement())
   prix_ttc         Float
   list_ingredient  String[]
-  nom              String  @db.VarChar(255)
+  nom              String  @db.VarChar(255) @unique
   restaurant_id    Int?
   image            String?
   cuisine          String?

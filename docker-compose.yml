@@ -53,6 +53,8 @@ services:
       context: 'users-api'
       dockerfile: Dockerfile
     container_name: users-api
+    environment:
+      - DATABASE_URL=postgresql://prisma:prismagoodfood@users-db:5432/users
     ports:
       - '3001:3000'
     networks:
@@ -77,6 +79,8 @@ services:
   restaurants-api:
     stdin_open: true
     image: 'rg.fr-par.scw.cloud/goodfood/restaurants-api:latest'
+    environment:
+      - DATABASE_URL=postgresql://prisma:prismagoodfood@restaurants-db:5432/restaurants
     build:
       context: 'restaurants-api'
       dockerfile: Dockerfile
@@ -95,6 +99,8 @@ services:
       context: 'plats-api'
       dockerfile: Dockerfile
     container_name: plats-api
+    environment:
+      - DATABASE_URL=postgresql://prisma:prismagoodfood@plats-db:5432/plats
     ports:
       - '3004:3000'
     networks:
@@ -109,6 +115,8 @@ services:
       context: 'commandes-api'
       dockerfile: Dockerfile
     container_name: commandes-api
+    environment:
+      - DATABASE_URL=postgresql://prisma:prismagoodfood@commandes-db:5432/commandes
     ports:
       - '3005:3000'
     networks:

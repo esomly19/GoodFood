@@ -20,6 +20,7 @@ a {
 }
 
 * {
+  scrollbar-width: 0;
   box-sizing: border-box;
 }
 
@@ -58,7 +59,6 @@ a {
 .icon-spacing{
   margin-right: 5px;
 }
-::-webkit-scrollbar {display:none;}
 
 .button-panier{
   width:33%;
@@ -75,4 +75,21 @@ a {
 .button-panier:hover{
   background-color:#FF724C ;
   color:white;
+}
+
+/* Scroll 1 */
+.sc1::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.sc1::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+.sc1::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 10px;
+}
+.scnone::-webkit-scrollbar{
+  display: none;
 }

@@ -10,13 +10,17 @@ import {
     ScaleFade,
     Tag, TagCloseButton, TagLabel,
     Text,
-    HStack
+    HStack, Divider
 } from "@chakra-ui/react";
 
 import {AiFillStar, AiOutlineSearch} from "react-icons/ai";
 
 import {BsFillPlusCircleFill} from "react-icons/bs";
 import PlatsDrawer from "./PlatsDrawer";
+import {capitalizeFirstLetter} from "../../utils/stringUtils";
+
+
+const MAIN_TAGS=[{tag:"plat",display:'Plats'},{tag:"boisson",display:'Boissons'},{tag:"dessert",display:'Desserts'},{tag:"entree",display:'Entrées'},];
 
 export default class Plats extends React.Component {
     constructor(props) {
@@ -40,8 +44,14 @@ export default class Plats extends React.Component {
 
     handleClickTag = (tag) =>{
         const {selectedTags}=this.state;
+        let copy = [...selectedTags];
+        if(MAIN_TAGS.find((t)=>t.tag==tag)){
+            copy=selectedTags.filter((t)=>{
+                return !MAIN_TAGS.map((tt)=>tt.tag).includes(t);
+            })
+        }
         if(selectedTags.includes(tag))return;
-        this.setState({selectedTags:[...selectedTags,tag]},this.refreshList);
+        this.setState({selectedTags:[...copy,tag]},this.refreshList);
     }
 
     handleRemoveTag = (tag) =>{
@@ -88,13 +98,14 @@ export default class Plats extends React.Component {
         const {plats,search,tags,selectedTags}=this.state;
         return(
             <>
-                <Flex flexDirection={"column"}marginX={10} mt={10}>
+                <Flex flexDirection={"column"}marginX={10} mt={2}>
                     <InputGroup >
                         <Input bg={"goodfood.white"} placeholder='Chercher un plat...' value={search} onChange={this.handleSearch}/>
                         <InputRightElement><AiOutlineSearch style={{cursor: "pointer"}}/></InputRightElement>
                     </InputGroup>
-                    <HStack spacing={2} marginY={4} overflow={"scroll"}>
+                    <HStack spacing={2} marginY={2} p={"3px"} overflowX={"scroll"} className={"sc1"}>
                         {tags.map((tag,key)=>{
+                            if(MAIN_TAGS.find((t)=>t.tag===tag))return null;
                             let isSelected=selectedTags.includes(tag);
                             return(
                                 <Tag
@@ -109,7 +120,7 @@ export default class Plats extends React.Component {
                                     cursor='pointer'
                                     minW={"none"}
                                     onClick={this.handleClickTag.bind(this, tag)}>
-                                    <TagLabel>{tag}</TagLabel>
+                                    <TagLabel>{capitalizeFirstLetter(tag)}</TagLabel>
                                     {isSelected?<TagCloseButton onClick={this.handleRemoveTag.bind(this, tag)}/>:null}
                                 </Tag>
                             );
@@ -117,8 +128,33 @@ export default class Plats extends React.Component {
 
                         )}
                     </HStack>
+                    <Divider/>
+                    <HStack spacing={2}  marginY={2}>
+                        {MAIN_TAGS.map(({tag,display},key)=>{
+                                let isSelected=selectedTags.includes(tag);
+                                return(
+                                    <Tag
+                                        key={key}
+                                        borderRadius='full'
+                                        variant='solid'
+                                        bg={isSelected?"white":"none"}
+                                        color={isSelected?"goodfood.blue":"goodfood.white"}
+                                        width={"fit-content"}
+                                        borderColor={"goodfood.white"}
+                                        borderWidth={"1px"}
+                                        cursor='pointer'
+                                        minW={"none"}
+                                        onClick={this.handleClickTag.bind(this, tag)}>
+                                        <TagLabel>{display}</TagLabel>
+                                        {isSelected?<TagCloseButton onClick={this.handleRemoveTag.bind(this, tag)}/>:null}
+                                    </Tag>
+                                );
+                            }
+
+                        )}
+                    </HStack>
                 </Flex>
-                <Flex bg={"goodfood.grey"} h={"100%"} overflowY={"scroll"} flexDirection={"column"} paddingX={10} borderTopRadius={20}>
+                <Flex bg={"goodfood.grey"} h={"100%"} overflowY={"scroll"} className={"scnone"} flexDirection={"column"} paddingX={10} borderTopRadius={20}>
 
                     <ScaleFade initialScale={0.9} in={true}>
                         {plats.map(this.renderPlats)}

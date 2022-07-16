@@ -23,7 +23,7 @@ export default class Commande extends React.Component {
     render() {
         const {state} = this.state;
         return (
-            <Flex h={"100%"} flexDirection={"column"} >
+            <Flex h={"100%"} flexDirection={"column"}>
                 {state === "plats" ?
                     <Plats ref={this.platsRef} panier={this.panierRef} restaurant={this.props.restaurant} plats={this.props.plats}/> :
                     state === "panier" ? <MonPanier panier={this.panierRef} restaurant={this.props.restaurant}/> :
