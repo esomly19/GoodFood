@@ -18,15 +18,36 @@ spec:
       containers:
         - name: front-end
           image: rg.fr-par.scw.cloud/goodfood/front-end:latest
+          env:
+            - name: USERS_API
+              value: "http://users-api:3000"
+            - name: AUTH_API
+              value: "http://auth-api:3000"
+            - name: RESTAURANTS_API
+              value: "http://restaurants-api:3000"
+            - name: PLATS_API
+              value: "http://plats-api:3000"
+            - name: COMMANDES_API
+              value: "http://commands-api:3000"
+            - name: ENV
+              value: "production"
           ports:
             - name: http
               containerPort: 3000
-              hostPort: 80
       imagePullSecrets:
         - name: registry-secret-deux
-
-
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end-service
+spec:
+  selector:
+    app: front-end
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
 
 #Auth API
 ---
@@ -237,41 +258,94 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
+
+#Network
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-service
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: www.goodfood-restaurants.fr
+spec:
+  selector:
+    app: front-end
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+      nodePort: 30013
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 3000
+  type: LoadBalancer
+
+
+#DNS
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-dns
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: external-dns
+rules:
+  - apiGroups: [""]
+    resources: ["services","endpoints","pods"]
+    verbs: ["get","watch","list"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["get","watch","list"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["list","watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: external-dns-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: external-dns
+subjects:
+  - kind: ServiceAccount
+    name: external-dns
+    namespace: default
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: plats-api
-  labels:
-    app: plats-api
+  name: external-dns
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: plats-api
+      app: external-dns
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: plats-api
+        app: external-dns
     spec:
+      serviceAccountName: external-dns
       containers:
-        - name: plats-db
-          image: rg.fr-par.scw.cloud/goodfood/postgres:latest
-          ports:
-            - name: http
-              containerPort: 5432
-              hostPort: 5435
+        - name: external-dns
+          image: k8s.gcr.io/external-dns/external-dns:v0.8.0
+          args:
+            - --source=service # ingress is also possible
+            - --domain-filter=goodfood-restaurants.fr
+            - --provider=scaleway
           env:
-            - name: POSTGRES_USER
-              value: prisma
-            - name: POSTGRES_PASSWORD
-              value: prismagoodfood
-            - name: POSTGRES_DB
-              value: plats
-        - name: plats-api
-          image: rg.fr-par.scw.cloud/goodfood/plats-api:latest
-          env:
-            - name: DATABASE_URL
-              value: "postgresql://prisma:prismagoodfood@localhost:5432/plats"
-      imagePullSecrets:
-        - name: registry-secret-deux
+            - name: SCW_ACCESS_KEY
+              value: "SCWJQ0CC3HX42F4F5508"
+            - name: SCW_SECRET_KEY
+              value: "4ddd378e-05ab-43a2-b7ad-5d599b72cd3d"
+            - name: SCW_DEFAULT_ORGANIZATION_ID
+              value: "3d8bf400-2afb-4b23-ad33-89721bd65125"
