@@ -127,6 +127,8 @@ services:
   front-end:
     stdin_open: true
     image: 'rg.fr-par.scw.cloud/goodfood/front-end:latest'
+    environment:
+      - ENV=production
     build:
       context: 'front-end'
       dockerfile: Dockerfile
