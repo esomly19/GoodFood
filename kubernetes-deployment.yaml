@@ -258,7 +258,44 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plats-api
+  labels:
+    app: plats-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plats-api
+  template:
+    metadata:
+      labels:
+        app: plats-api
+    spec:
+      containers:
+        - name: plats-db
+          image: rg.fr-par.scw.cloud/goodfood/postgres:latest
+          ports:
+            - name: http
+              containerPort: 5432
+              hostPort: 5434
+          env:
+            - name: POSTGRES_USER
+              value: prisma
+            - name: POSTGRES_PASSWORD
+              value: prismagoodfood
+            - name: POSTGRES_DB
+              value: plats
+        - name: plats-api
+          image: rg.fr-par.scw.cloud/goodfood/plats-api:latest
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://prisma:prismagoodfood@localhost:5432/plats"
+      imagePullSecrets:
+        - name: registry-secret-deux
 #Network
 ---
 apiVersion: v1

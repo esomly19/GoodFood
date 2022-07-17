@@ -10,7 +10,7 @@ import {
     ScaleFade,
     Tag, TagCloseButton, TagLabel,
     Text,
-    HStack, Divider
+    HStack, Divider, Skeleton
 } from "@chakra-ui/react";
 
 import {AiFillStar, AiOutlineSearch} from "react-icons/ai";
@@ -75,7 +75,9 @@ export default class Plats extends React.Component {
     renderPlats = (plat,index)=>{
         return(
           <Container key={index} marginTop={10} borderRadius={20} p={0} flexDirection={"row"} bg={"goodfood.white"}>
-              <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}  objectFit='cover' alt={"logo"}/>
+              <Skeleton isLoaded>
+                 <Image src={plat.image} h={"150px"} w={"100%"} borderTopRadius={20}  objectFit='cover' alt={"logo"}/>
+              </Skeleton>
               <Flex flexDirection={"column"} pl={5} pr={5}>
                   <Text as={"i"} fontSize={15} mt={2}>{"Cuisine "+plat.cuisine}</Text>
               <Flex justifyContent={"space-between"}>

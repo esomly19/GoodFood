@@ -18,12 +18,19 @@ export default class Register extends Component{
     }
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", ({code})=>code==="Enter"?this.submit():null);
+  }
+
+  componentWillUnmount() {
+    document.addEventListener("keydown", (event)=>{});
+  }
+
   submit = async () =>{
     let {email,password,confirm_password,username,phone}=this.state;
     if(confirm_password!==password||!email||!password||!username||!phone)return;
     try{
       let res=await instance.post("/register",{email:email,password:password,confirm_password:confirm_password,username:username,phone:phone});
-      console.log(res)
       this.setState({status:"ok"})
     }
     catch (e) {

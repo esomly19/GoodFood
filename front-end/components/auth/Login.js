@@ -19,9 +19,14 @@ export default class Login extends Component{
       error:undefined,
     }
   }
+  
   componentDidMount() {
     document.addEventListener("keydown", ({code})=>code==="Enter"?this.onLogIn():null);
-  };
+  }
+
+  componentWillUnmount() {
+    document.addEventListener("keydown", (event)=>{});
+  }
 
   onLogIn = async () =>{
     try{
