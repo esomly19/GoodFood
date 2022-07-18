@@ -45,7 +45,7 @@ a {
   padding:0 !important;
 }
 .container-custom{
-  max-width:61vw!important;
+  max-width:50vw!important;
 }
 @media only screen and (max-width: 900px) {
   .container-custom {
