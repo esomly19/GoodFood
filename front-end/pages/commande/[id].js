@@ -9,7 +9,7 @@ export default function Restaurant(props){
             <Flex height={"10vh"} justifyContent={"center"} width={"100%"}>
                 <Image src={"/goodfood-apple.svg"} alt={"logo"}/>
             </Flex>
-            <Container h={"90vh"} w={"100vw"} className={"container-auth"} borderTopRadius={10} >
+            <Container h={"90vh"} w={"100vw"} className={"container-auth container-custom"} borderTopRadius={10} >
                 {
                     restaurant?<Commande restaurant={restaurant} plats={plats}/>:<Text align={"center"}>{"Ce restaurant n'est pas disponible pour le moment!"}</Text>
                 }

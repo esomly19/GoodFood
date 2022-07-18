@@ -122,6 +122,21 @@ async function main() {
             description:"Notre choucroute revisitée par nos chefs étoilés sera vous surpendre par ses saveurs de nos régions. "
         },
     })
+    await prisma.plat.upsert({
+        where: { nom: 'Orangina' },
+        update: {},
+        create: {
+            prix_ttc: 2,
+            nom: 'Orangina',
+            list_ingredient: ["orange","sucre"],
+            restaurant_id: null,
+            image: '/images/orangina.webp',
+            cuisine: ' ',
+            tags: ['boisson'],
+            supplements: [],
+            description:"Notre orangina importé par nos chefs étoilés sera vous surpendre par ses bulles et son goût orangé. "
+        },
+    })
 }
 
 main()

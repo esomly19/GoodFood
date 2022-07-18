@@ -18,6 +18,7 @@ import {AiFillStar, AiOutlineSearch} from "react-icons/ai";
 import {BsFillPlusCircleFill} from "react-icons/bs";
 import PlatsDrawer from "./PlatsDrawer";
 import {capitalizeFirstLetter} from "../../utils/stringUtils";
+import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 
 
 const MAIN_TAGS=[{tag:"plat",display:'Plats'},{tag:"boisson",display:'Boissons'},{tag:"dessert",display:'Desserts'},{tag:"entree",display:'Entrées'},];
@@ -33,6 +34,7 @@ export default class Plats extends React.Component {
             selectedTags:[]
         }
         this.drawerRef=React.createRef();
+        this.tagsRef=React.createRef();
     }
 
 
@@ -96,6 +98,30 @@ export default class Plats extends React.Component {
         );
     }
 
+    handleLeft = ()=>{
+        let i=0;
+        let obj=this;
+        let intervalId=setInterval(function(){
+            obj.tagsRef.current.scrollLeft-=3;
+            i++;
+            if(i == 20){
+                clearInterval(intervalId);
+            }
+        }, 10);
+
+    }
+    handleRight = ()=>{
+        let i=0;
+        let obj=this;
+        let intervalId=setInterval(function(){
+            obj.tagsRef.current.scrollLeft+=3;
+            i++;
+            if(i == 20){
+                clearInterval(intervalId);
+            }
+        }, 20);
+
+    }
     render() {
         const {plats,search,tags,selectedTags}=this.state;
         return(
@@ -105,31 +131,35 @@ export default class Plats extends React.Component {
                         <Input bg={"goodfood.white"} placeholder='Chercher un plat...' value={search} onChange={this.handleSearch}/>
                         <InputRightElement><AiOutlineSearch style={{cursor: "pointer"}}/></InputRightElement>
                     </InputGroup>
-                    <HStack spacing={2} marginY={2} p={"3px"} overflowX={"scroll"} className={"sc1"}>
-                        {tags.map((tag,key)=>{
-                            if(MAIN_TAGS.find((t)=>t.tag===tag))return null;
-                            let isSelected=selectedTags.includes(tag);
-                            return(
-                                <Tag
-                                    key={key}
-                                    borderRadius='full'
-                                    variant='solid'
-                                    bg={isSelected?"white":"none"}
-                                    color={isSelected?"goodfood.blue":"goodfood.white"}
-                                    width={"fit-content"}
-                                    borderColor={"goodfood.white"}
-                                    borderWidth={"1px"}
-                                    cursor='pointer'
-                                    minW={"none"}
-                                    onClick={this.handleClickTag.bind(this, tag)}>
-                                    <TagLabel>{capitalizeFirstLetter(tag)}</TagLabel>
-                                    {isSelected?<TagCloseButton onClick={this.handleRemoveTag.bind(this, tag)}/>:null}
-                                </Tag>
-                            );
-                        }
+                    <Flex align="center" justifyContent={"space-between"}>
+                        <IoIosArrowBack size={25} cursor="pointer" color={"white"} onClick={this.handleLeft}/>
+                        <HStack spacing={2} marginY={2} p={"3px"} overflowX={"scroll"} className={"scnone"} ref={this.tagsRef} transitionDuration={"500ms"}>
+                            {tags.map((tag,key)=>{
+                                    if(MAIN_TAGS.find((t)=>t.tag===tag))return null;
+                                    let isSelected=selectedTags.includes(tag);
+                                    return(
+                                        <Tag
+                                            key={key}
+                                            borderRadius='full'
+                                            variant='solid'
+                                            bg={isSelected?"white":"none"}
+                                            color={isSelected?"goodfood.blue":"goodfood.white"}
+                                            width={"fit-content"}
+                                            borderColor={"goodfood.white"}
+                                            borderWidth={"1px"}
+                                            cursor='pointer'
+                                            minW={"none"}
+                                            onClick={this.handleClickTag.bind(this, tag)}>
+                                            <TagLabel>{capitalizeFirstLetter(tag)}</TagLabel>
+                                            {isSelected?<TagCloseButton onClick={this.handleRemoveTag.bind(this, tag)}/>:null}
+                                        </Tag>
+                                    );
+                                }
 
-                        )}
-                    </HStack>
+                            )}
+                        </HStack>
+                        <IoIosArrowForward size={25} cursor="pointer" color={"white"} onClick={this.handleRight}/>
+                    </Flex>
                     <Divider/>
                     <HStack spacing={2}  marginY={2}>
                         {MAIN_TAGS.map(({tag,display},key)=>{
