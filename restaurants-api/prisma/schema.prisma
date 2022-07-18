@@ -10,8 +10,10 @@ datasource db {
 
 model Restaurant {
   id       Int     @id @default(autoincrement())
-  ville    String  @db.VarChar(255)
+  ville    String  @db.VarChar(255) @unique
   pays     String  @db.VarChar(255)
   adresse  String  @db.VarChar(255)
   tel      String? @db.VarChar(255)
+  lat      Float?
+  lng      Float?
 }

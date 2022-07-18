@@ -96,7 +96,7 @@ export default class MonPanier extends React.Component{
 
         return(
 
-            <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"}>
+            <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"} className={"scnone"}>
                 <Flex  h={"99%"} flexDirection={"column"}>
                     <Flex alignItems={"center"} justifyContent={"space-between"} marginX={5} mt={5}>
                         <Heading size='lg'>Votre Commande</Heading>
@@ -124,7 +124,7 @@ export default class MonPanier extends React.Component{
 
                     </Flex>
                     <Flex bg={"goodfood.grey"} height={"100%"} flexDirection={"column"} paddingX={10}  >
-                        <Flex  height={"400px"}  overflowY={"scroll"} flexDirection={"column"} >
+                        <Flex  height={"400px"}  overflowY={"scroll"} className={"sc1"} flexDirection={"column"} >
                             {plats.map(this.renderPlats)}
                         </Flex>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Center, Flex, Heading, Text} from "@chakra-ui/react";
 import {instanceCommandes} from "../../utils/axiosInstance";
-import {parseCookies} from "nookies";
+import {destroyCookie, parseCookies, setCookie} from "nookies";
 import jwt from "jwt-decode";
 import Router from "next/router";
 
@@ -18,6 +18,12 @@ export default class Profil extends React.Component {
         let id_client= jwt(cookies.token).id;
         let {data} = await instanceCommandes.post("/user", {id_client})
         this.setState({commandes:data});
+    }
+
+    deconnexion= () =>{
+        setCookie(null,'token','value',{maxAge:0})
+        console.log("slt")
+        window.location.reload(false);
     }
 
     renderCommande = (commande,key) =>{
@@ -46,6 +52,7 @@ export default class Profil extends React.Component {
                     <Heading>Profil</Heading>
                     <Heading size={"lg"} mt={2}>Mes commandes</Heading>
                     <Flex borderRadius={20} bg={"goodfood.white"} h={"50%"} marginY={4} overflowY={"scroll"}
+                          className={"scnone"}
                           style={{filter:"drop-shadow(0px 0px 5px #C0C0C0"}} flexDirection={"column"}>
                         {commandes.map(this.renderCommande)}
                     </Flex>
@@ -74,6 +81,15 @@ export default class Profil extends React.Component {
                             borderRadius={"100"}
                             marginY={5}>
                             Compte
+                        </Button>
+                        <Button
+                            bg={"goodfood.red"}
+                            color={"goodfood.white"}
+                            minWidth={200}
+                            borderRadius={"100"}
+                            marginY={5}
+                            onClick={this.deconnexion}>
+                            {"Déconnexion"}
                         </Button>
                     </Center>
                 </Flex>

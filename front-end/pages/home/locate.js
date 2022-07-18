@@ -6,33 +6,6 @@ import Router from 'next/router';
 import React, {useState} from "react";
 import {instanceRestaurant} from "../../utils/axiosInstance";
 
-const GEOCODE = {
-  Nancy:{
-    lat:48.6937223,
-    lng:6.1834097
-  },
-  Paris:{
-    lat:48.8534951,
-    lng:2.3483915
-  },
-  Bordeaux:{
-    lat:44.841225,
-    lng:-0.5800364
-  },
-  Nantes:{
-    lat:47.2186371,
-    lng:-1.5541362
-  },
-  Strasbourg:{
-    lat:48.584614,
-    lng:7.7507127
-  },
-  Lille:{
-    lat:50.6365654,
-    lng:3.0635282
-  }
-}
-
 export default function Locate(props){
   const [restaurant,setRestaurant]=useState(null);
 
@@ -46,10 +19,10 @@ export default function Locate(props){
           <Button position={"absolute"} zIndex={"500"}top={5} left={5} onClick={()=>Router.push("/home/search")}>{"< Nos restaurants"}</Button>
           <GoogleMapReact
             bootstrapURLKeys={{ key: "" }}
-            defaultCenter={GEOCODE.Nancy}
+            defaultCenter={props.restaurants[0]?{...props.restaurants[0]}:null}
             defaultZoom={11}>
             {props.restaurants?.map((restaurant,index)=>{
-              return <Image key={index} {...GEOCODE[restaurant.ville]} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"} alt={"logo"}/>;
+              return <Image key={index} {...restaurant} onClick={()=>setRestaurant(restaurant)} style={greatPlaceStyle} src={"/goodfood-apple.svg"} alt={"logo"}/>;
             })
             }
           </GoogleMapReact>

@@ -52,11 +52,11 @@ export default class PlatsDrawer extends React.Component {
             <Drawer placement={'bottom'} onClose={this.handleClose} isOpen={open} size={"full"}>
                 <DrawerOverlay/>
                 <DrawerContent display={"flex"} className={"container-auth"} bg={"none"}>
-                    <Container h={"100vh"} w={"100vw"} className={"container-auth"} borderTopRadius={10}
+                    <Container h={"100vh"} w={"100vw"} className={"container-auth scnone"} borderTopRadius={10}
                                overflow={"scroll"} bg={"goodfood.grey"}>
                         <BsArrowLeftCircleFill onClick={this.handleClose} color={"#FF724C"} size={35} cursor={"pointer"}
                                                style={{position: "absolute", marginTop: 10, marginLeft: 10}}/>
-                        <Image src={plat.image} height={300} objectFit='cover' zIndex={-50} marginBottom={-100} alt={"logo"}/>
+                        <Image src={plat.image} height={300} w={"100%"} objectFit='cover' zIndex={-50} marginBottom={-100} alt={"logo"}/>
                         <Tag size='lg' bg={"white"} borderRadius='full' position='relative' top={5} marginLeft={50}
                              zIndex={100} style={{filter: "drop-shadow(0px 0px 5px #000000"}}>
                             <TagLabel>{plat.nom}</TagLabel>
