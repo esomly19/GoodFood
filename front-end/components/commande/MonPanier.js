@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Center, Flex, Heading, Image, Text, Wrap, WrapItem} from "@chakra-ui/react";
+import {Box, Button, Center, Flex, Heading, Image, Text, Wrap, WrapItem} from "@chakra-ui/react";
 import {AiOutlineMinus, AiOutlinePlus, AiOutlineShopping} from "react-icons/ai";
 import {BsArrowRight} from "react-icons/bs";
 import "react-datetime/css/react-datetime.css";
@@ -111,10 +111,12 @@ export default class MonPanier extends React.Component{
                             </Center>
                         </WrapItem>
                         <WrapItem>
-                            <Center flexDirection={"column"} justifyContent={"start"}  width={"200px"}>
-                                <Heading size={"xs"} w={"100%"}>{restaurant.ville+", "+restaurant.pays}</Heading>
-                                <Text w={"100%"}>{restaurant.adresse}</Text>
-                                <Text w={"100%"}>{restaurant.tel}</Text>
+                            <Center flexDirection={"column"} justifyContent={"start"} width={"200px"} h={"100%"}>
+                                <Box height={"100%"} display={"flex"} justifyContent={"center"} flexDirection={"column"} >
+                                    <Heading size={"xs"} w={"100%"}>{restaurant.ville+", "+restaurant.pays}</Heading>
+                                    <Text w={"100%"}>{restaurant.adresse}</Text>
+                                    <Text w={"100%"}>{restaurant.tel}</Text>
+                                </Box>
                             </Center>
                         </WrapItem>
                         <WrapItem>
@@ -124,7 +126,7 @@ export default class MonPanier extends React.Component{
                                     dateFormat={false}
                                     value={horraire}
                                     onChange={(data)=>this.setState({horraire:data})}
-                                    inputProps={{ placeholder: "Horraire" ,style: { borderRadius:20,padding:5,textAlign: "center", justifyContent:"center", width:100, textOverflow:"clip"}}}/>
+                                    inputProps={{ placeholder: "Horraire" ,style: { marginLeft:-20,borderRadius:20,padding:5,textAlign: "center", justifyContent:"center", width:100, textOverflow:"clip"}}}/>
                             </Center>
                         </WrapItem>
                     </Wrap>
