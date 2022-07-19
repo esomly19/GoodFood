@@ -18,6 +18,7 @@ spec:
       containers:
         - image: rg.fr-par.scw.cloud/goodfood/front-end:latest
           name: front-end
+          imagePullPolicy: "Always"
           ports:
             - name: http
               containerPort: 3000
@@ -56,6 +57,7 @@ spec:
     spec:
       containers:
         - name: auth-api
+          imagePullPolicy: "Always"
           image: rg.fr-par.scw.cloud/goodfood/auth-api:latest
           env:
             - name: URL_USER
@@ -124,6 +126,7 @@ spec:
               value: users
         - name: users-api
           image: rg.fr-par.scw.cloud/goodfood/users-api:latest
+          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
               value: "postgresql://prisma:prismagoodfood@localhost:5432/users"
@@ -178,6 +181,7 @@ spec:
               value: plats
         - name: plats-api
           image: rg.fr-par.scw.cloud/goodfood/plats-api:latest
+          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
               value: "postgresql://prisma:prismagoodfood@localhost:5432/plats"
@@ -230,6 +234,7 @@ spec:
               value: restaurants
         - name: restaurants-api
           image: rg.fr-par.scw.cloud/goodfood/restaurants-api:latest
+          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
               value: "postgresql://prisma:prismagoodfood@localhost:5432/restaurants"
@@ -283,6 +288,7 @@ spec:
               value: commandes
         - name: commandes-api
           image: rg.fr-par.scw.cloud/goodfood/commandes-api:latest
+          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
               value: "postgresql://prisma:prismagoodfood@localhost:5432/commandes"
