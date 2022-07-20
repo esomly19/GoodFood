@@ -12,6 +12,8 @@ services:
       - POSTGRES_DB=users
     networks:
       - goodfood
+    ports:
+      - "5433:5432"
 
   restaurants-db:
     container_name: restaurants-db

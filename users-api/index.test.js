@@ -1,4 +1,4 @@
-const request = require('supertest');
+const supertest = require('supertest');
 const app = require('./app');
 
 describe('Sample Test', () => {
@@ -8,18 +8,12 @@ describe('Sample Test', () => {
 });
 
 describe('GET /users', function () {
-  it('respond with json', function (done) {
-    try {
-      request(app)
+  it('respond with json', async function () {
+      await supertest(app)
         .get('/')
-        .set('Accept', 'application/json')
-        .expect(200)
-        .end(function (err, res) {
-          if (err) return done(err);
-          done();
-        });
-    } catch (err) {
-      console.log(err);
-    }
+        .expect(200).then((response)=>{
+            expect(Array.isArray(response.body)).toBeTruthy();
+          });
+      return true;
   });
 });
