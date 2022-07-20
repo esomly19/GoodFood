@@ -7,7 +7,7 @@ describe('Sample Test', () => {
   });
 });
 
-describe('GET /users', function () {
+describe('GET /commandes', function () {
   it('respond with json', async function () {
       await supertest(app)
         .get('/')
