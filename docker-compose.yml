@@ -12,6 +12,8 @@ services:
       - POSTGRES_DB=users
     networks:
       - goodfood
+    ports:
+      - "5433:5432"
 
   restaurants-db:
     container_name: restaurants-db
@@ -69,6 +71,8 @@ services:
       context: 'auth-api'
       dockerfile: Dockerfile
     container_name: auth-api
+    environment:
+      - URL_USER=http://users-api:3000
     ports:
       - '3002:3000'
     networks:
@@ -127,8 +131,6 @@ services:
   front-end:
     stdin_open: true
     image: 'rg.fr-par.scw.cloud/goodfood/front-end:latest'
-    environment:
-      - ENV=production
     build:
       context: 'front-end'
       dockerfile: Dockerfile

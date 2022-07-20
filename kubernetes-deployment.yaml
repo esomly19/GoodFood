@@ -16,21 +16,8 @@ spec:
         app: front-end
     spec:
       containers:
-        - name: front-end
-          image: rg.fr-par.scw.cloud/goodfood/front-end:latest
-          env:
-            - name: USERS_API
-              value: "http://users-api:3000"
-            - name: AUTH_API
-              value: "http://auth-api:3000"
-            - name: RESTAURANTS_API
-              value: "http://restaurants-api:3000"
-            - name: PLATS_API
-              value: "http://plats-api:3000"
-            - name: COMMANDES_API
-              value: "http://commands-api:3000"
-            - name: ENV
-              value: "production"
+        - image: rg.fr-par.scw.cloud/goodfood/front-end:latest
+          name: front-end
           ports:
             - name: http
               containerPort: 3000
@@ -70,6 +57,11 @@ spec:
       containers:
         - name: auth-api
           image: rg.fr-par.scw.cloud/goodfood/auth-api:latest
+          env:
+            - name: URL_USER
+              value: "http://users-api:3000"
+            - name: TOKEN_KEY
+              value: "PIZJFOZF23I2HROZEUFH3"
       imagePullSecrets:
         - name: registry-secret-deux
 ---
@@ -138,6 +130,59 @@ spec:
       imagePullSecrets:
         - name: registry-secret-deux
 
+
+
+#Plats API
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plats-api
+spec:
+  selector:
+    app: plats-api
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plats-api
+  labels:
+    app: plats-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plats-api
+  template:
+    metadata:
+      labels:
+        app: plats-api
+    spec:
+      containers:
+        - name: plats-db
+          image: rg.fr-par.scw.cloud/goodfood/postgres:latest
+          ports:
+            - name: http
+              containerPort: 5432
+              hostPort: 5434
+          env:
+            - name: POSTGRES_USER
+              value: prisma
+            - name: POSTGRES_PASSWORD
+              value: prismagoodfood
+            - name: POSTGRES_DB
+              value: plats
+        - name: plats-api
+          image: rg.fr-par.scw.cloud/goodfood/plats-api:latest
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://prisma:prismagoodfood@localhost:5432/plats"
+      imagePullSecrets:
+        - name: registry-secret-deux
 
 #Restaurants API
 ---
@@ -228,7 +273,7 @@ spec:
           ports:
             - name: http
               containerPort: 5432
-              hostPort: 5434
+              hostPort: 5435
           env:
             - name: POSTGRES_USER
               value: prisma
@@ -244,58 +289,6 @@ spec:
       imagePullSecrets:
         - name: registry-secret-deux
 
-
-#Plats API
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: plats-api
-spec:
-  selector:
-    app: plats-api
-  ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: plats-api
-  labels:
-    app: plats-api
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: plats-api
-  template:
-    metadata:
-      labels:
-        app: plats-api
-    spec:
-      containers:
-        - name: plats-db
-          image: rg.fr-par.scw.cloud/goodfood/postgres:latest
-          ports:
-            - name: http
-              containerPort: 5432
-              hostPort: 5434
-          env:
-            - name: POSTGRES_USER
-              value: prisma
-            - name: POSTGRES_PASSWORD
-              value: prismagoodfood
-            - name: POSTGRES_DB
-              value: plats
-        - name: plats-api
-          image: rg.fr-par.scw.cloud/goodfood/plats-api:latest
-          env:
-            - name: DATABASE_URL
-              value: "postgresql://prisma:prismagoodfood@localhost:5432/plats"
-      imagePullSecrets:
-        - name: registry-secret-deux
 #Network
 ---
 apiVersion: v1

@@ -17,6 +17,7 @@ export default function Restaurant(props){
         </HomeLayout>);
 
 }
+
 export async function getServerSideProps(context) {
     let {id}=context.params;
     let restaurant,plats;
