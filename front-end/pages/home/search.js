@@ -32,10 +32,10 @@ export default function Search(props){
         <Flex marginRight={25} justifyContent={"center"} alignItems={"center"}>
           <GoLocation size={25}/>
         </Flex>
-        <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-          <Heading size={"xs"}>{resto.ville+", "+resto.pays}</Heading>
-          <Text>{resto.adresse}</Text>
-          <Text>{resto.tel}</Text>
+        <Flex flexDirection={"column"} >
+          <Heading justifyContent={"start"}size={"xs"}>{resto.ville+", "+resto.pays}</Heading>
+          <Text textAlign={"start"}>{resto.adresse}</Text>
+          <Text textAlign={"start"}>{resto.tel}</Text>
         </Flex>
       </Flex>
     );

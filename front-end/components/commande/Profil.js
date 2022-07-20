@@ -22,7 +22,6 @@ export default class Profil extends React.Component {
 
     deconnexion= () =>{
         setCookie(null,'token','value',{maxAge:0})
-        console.log("slt")
         window.location.reload(false);
     }
 
@@ -51,7 +50,7 @@ export default class Profil extends React.Component {
                 <Flex  h={"99%"} flexDirection={"column"} p={5}>
                     <Heading>Profil</Heading>
                     <Heading size={"lg"} mt={2}>Mes commandes</Heading>
-                    <Flex borderRadius={20} bg={"goodfood.white"} h={"50%"} marginY={4} overflowY={"scroll"}
+                    <Flex borderRadius={20} bg={"goodfood.white"} h={"50%"} minHeight={"200px"} marginY={4} overflowY={"scroll"}
                           className={"scnone"}
                           style={{filter:"drop-shadow(0px 0px 5px #C0C0C0"}} flexDirection={"column"}>
                         {commandes.map(this.renderCommande)}

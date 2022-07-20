@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Center, Flex, Heading, Image, Text} from "@chakra-ui/react";
+import {Box, Button, Center, Flex, Heading, Image, Text, Wrap, WrapItem} from "@chakra-ui/react";
 import {AiOutlineMinus, AiOutlinePlus, AiOutlineShopping} from "react-icons/ai";
 import {BsArrowRight} from "react-icons/bs";
 import "react-datetime/css/react-datetime.css";
@@ -82,14 +82,13 @@ export default class MonPanier extends React.Component{
         const {panier,restaurant}=this.props;
         const {horraire,status}=this.state;
         const plats=panier.current.getPlats();
+
         if(status==="sent") return(
             <Flex h={"100%"} flexDirection={"column"} bg={"goodfood.grey"} borderTopRadius={20} overflow={"scroll"}>
-                <Flex  h={"99%"} flexDirection={"column"}>
-                    <Lottie animationData={successAnimation} />;
-                    <Center>
+                    <Center flexDirection="column" h={"100%"}>
+                        <Lottie animationData={successAnimation} />;
                         <Heading>Merci de votre commande</Heading>
                     </Center>
-                </Flex>
             </Flex>
         );
 
@@ -105,24 +104,32 @@ export default class MonPanier extends React.Component{
                             <Text>{plats.length}</Text>
                         </Flex>
                     </Flex>
-                    <Flex bg={"goodfood.yellow"} color={"goodfood.blue"} marginX={10} borderRadius={20} marginY={2}>
-                        <Image src={"/goodfood-apple.svg"} w={20} m={2} alt={"logo"}/>
-                        <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-                            <Heading size={"xs"}>{restaurant.ville+", "+restaurant.pays}</Heading>
-                            <Text>{restaurant.adresse}</Text>
-                            <Text>{restaurant.tel}</Text>
-                        </Flex>
-                        <Center paddingLeft={5}>
-                            <Datetime
-                                locale={"fr"}
-                                style={{backgroundColor:"red"}}
-                                dateFormat={false}
-                                value={horraire}
-                                onChange={(data)=>this.setState({horraire:data})}
-                                inputProps={{ placeholder: "Sélectionner un horraire" ,style: { borderRadius:20,padding:5,textAlign: "center"}}}/>
-                        </Center>
-
-                    </Flex>
+                    <Wrap bg={"goodfood.yellow"} color={"goodfood.blue"} justify='center' marginX={10} borderRadius={20} marginY={2}>
+                        <WrapItem>
+                            <Center>
+                                <Image src={"/goodfood-apple.svg"} w={20} m={2} alt={"logo"}/>
+                            </Center>
+                        </WrapItem>
+                        <WrapItem>
+                            <Center flexDirection={"column"} justifyContent={"start"} width={"200px"} h={"100%"}>
+                                <Box height={"100%"} display={"flex"} justifyContent={"center"} flexDirection={"column"} >
+                                    <Heading size={"xs"} w={"100%"}>{restaurant.ville+", "+restaurant.pays}</Heading>
+                                    <Text w={"100%"}>{restaurant.adresse}</Text>
+                                    <Text w={"100%"}>{restaurant.tel}</Text>
+                                </Box>
+                            </Center>
+                        </WrapItem>
+                        <WrapItem>
+                            <Center paddingLeft={5}  h={"100%"}>
+                                <Datetime
+                                    locale={"fr"}
+                                    dateFormat={false}
+                                    value={horraire}
+                                    onChange={(data)=>this.setState({horraire:data})}
+                                    inputProps={{ placeholder: "Horraire" ,style: { marginLeft:-20,borderRadius:20,padding:5,textAlign: "center", justifyContent:"center", width:100, textOverflow:"clip"}}}/>
+                            </Center>
+                        </WrapItem>
+                    </Wrap>
                     <Flex bg={"goodfood.grey"} height={"100%"} flexDirection={"column"} paddingX={10}  >
                         <Flex  height={"400px"}  overflowY={"scroll"} className={"sc1"} flexDirection={"column"} >
                             {plats.map(this.renderPlats)}

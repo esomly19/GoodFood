@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "prisma db push && jest"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
@@ -19,6 +20,8 @@
     "lodash": "^4.17.21",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
-    "prisma": "^3.14.0"
+    "prisma": "^3.14.0",
+    "supertest": "^6.2.4",
+    "jest": "^28.1.3"
   }
 }

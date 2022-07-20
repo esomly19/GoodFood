@@ -1,7 +1,13 @@
 require("dotenv").config();
 let dev = process.env.ENV === "development";
+const withPWA = require("next-pwa");
 
-module.exports = {
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
   reactStrictMode: true,
   env:{
     USERS_API:dev?'http://localhost:3001':process.env.USERS_API,
@@ -22,4 +28,4 @@ module.exports = {
       },
     ]
   },
-}
+})
