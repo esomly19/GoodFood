@@ -17,3 +17,5 @@ app.use("/",authRoute);
 app.listen(process.env.PORT||3000,()=>{
   console.log("Auth API launched!"+process.env.PORT)
 })
+
+module.exports = app;

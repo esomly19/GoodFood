@@ -19,3 +19,4 @@ app.use("/", platsRoute);
 app.listen(process.env.PORT||3000,()=>{
   console.log("Plats API launched!"+process.env.PORT)
 })
+module.exports = app;

@@ -17,3 +17,4 @@ app.use("/",restaurantsRoute);
 app.listen(process.env.PORT||3000,()=>{
   console.log("Restaurant API launched!"+process.env.PORT)
 })
+module.exports = app;

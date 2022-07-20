@@ -19,3 +19,4 @@ app.use("/", commandesRoute);
 app.listen(process.env.PORT||3000,()=>{
   console.log("Commandes API launched!"+process.env.PORT)
 })
+module.exports = app;
